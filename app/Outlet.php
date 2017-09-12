@@ -10,4 +10,9 @@ class Outlet extends Model
         'id',
         'name'
     ];
+
+    public function transactions()
+    {
+        $this->hasMany('App\Transaction');
+    }
 }

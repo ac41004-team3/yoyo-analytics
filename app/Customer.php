@@ -11,4 +11,9 @@ class Customer extends Model
     ];
 
     public $incrementing = false;
+
+    public function transactions()
+    {
+        $this->hasMany('App\Transaction');
+    }
 }
