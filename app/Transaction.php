@@ -14,4 +14,14 @@ class Transaction extends Model
         'discount',
         'total'
     ];
+
+    public function outlet()
+    {
+        $this->hasOne('App\Outlet');
+    }
+
+    public function customer()
+    {
+        $this->hasOne('App\Customer');
+    }
 }
