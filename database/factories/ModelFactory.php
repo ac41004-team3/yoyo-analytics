@@ -45,6 +45,7 @@ $factory->define(App\Transaction::class, function (Faker $faker) {
     ]);
 
     $spent = $faker->randomNumber(4);
+    $discount = 0;
     if($type == 'discounted payment') {
         $discount = $faker->randomNumber(4);
     }
