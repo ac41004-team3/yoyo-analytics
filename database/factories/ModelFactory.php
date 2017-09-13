@@ -1,5 +1,6 @@
 <?php
 
+use App\Outlet;
 use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
@@ -62,12 +63,7 @@ $factory->define(App\Transaction::class, function (Faker $faker) {
     }
 
     return [
-        'outlet_id' => function () {
-            return factory(App\Outlet::class)->create()->id;
-        },
-        'customer_id' => function () {
-            return factory(App\Customer::class)->create()->id;
-        },
+        'outlet_id' => Outlet::inRandomOrder()->first()->id,
         'type' => $type,
         'spent' => $spent,
         'discount' => $discount,
