@@ -22,16 +22,27 @@ $factory->define(App\Customer::class, function (Faker $faker) {
 $factory->define(App\Outlet::class, function (Faker $faker) {
     return [
         'name' => $faker->randomElement([
-            'air',
-            'bar',
-            'campus',
-            'ents',
-            'liar',
-            'library',
-            'mono',
-            'remote',
-            'shop',
-            'spare',
+            'Outlet Name',
+            'Library',
+            'Spare',
+            'Air Bar',
+            'Ents',
+            'Remote Campus Shop',
+            'Liar Bar',
+            'Mono',
+            'Food on Four',
+            'Floor Five',
+            'DOJ Catering',
+            'DJCAD Cantina',
+            'Level 2, Reception',
+            'DUSA The Union - Marketplace',
+            'Premier Shop - Yoyo Accept',
+            'Dental Café',
+            'Online Dundee University Students Association',
+            'DUSA The Union Online',
+            'Premier Shop',
+            'College Shop',
+            'Ninewells Shop',
         ])
     ];
 });
@@ -46,15 +57,15 @@ $factory->define(App\Transaction::class, function (Faker $faker) {
 
     $spent = $faker->randomNumber(4);
     $discount = 0;
-    if($type == 'discounted payment') {
+    if ($type == 'discounted payment') {
         $discount = $faker->randomNumber(4);
     }
 
     return [
-        'outlet_id' => function() {
+        'outlet_id' => function () {
             return factory(App\Outlet::class)->create()->id;
         },
-        'customer_id' => function() {
+        'customer_id' => function () {
             return factory(App\Customer::class)->create()->id;
         },
         'type' => $type,
