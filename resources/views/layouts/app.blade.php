@@ -12,13 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar-fixed-side.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+        
+        <nav class="navbar navbar-default navbar-static-top">       
+            <div class="container-fluid">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -32,6 +33,8 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
+                
+                
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
@@ -67,9 +70,30 @@
                             </li>
                         @endguest
                     </ul>
+                    
+                    
                 </div>
             </div>
+            
+            <!--side nav bar -->
+            <div class="col-sm-2">
+                <nav class="navbar navbar-default navbar-fixed-side">
+                    
+                    
+                    <ul class="">
+                        <li><a href="#"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cog">&nbsp;</span>Options</a></li>
+                    </ul>
+                    
+                    
+                </nav>
+            </div>
+            
         </nav>
+        
 
         @yield('content')
     </div>
