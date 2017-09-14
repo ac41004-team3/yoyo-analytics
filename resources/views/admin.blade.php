@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="scripts/jquery-3.2.1.js" type="text/javascript"></script>
-    <script src="scripts/jtable.2.4.0/jquery.jtable.js" type="text/javascript"></script>
-    <script src="scripts/jtable.2.4.0/themes/basic/jtable_basic.less" type="text/javascript"></script>
+    <script src="/scripts/jquery-3.2.1.js" ></script>
+    <script src="/scripts/jtable.2.4.0/jquery.jtable.js"></script>
+    <script src="/scripts/jtable.2.4.0/themes/basic/jtable_basic.less"></script>
 
     <title>Laravel</title>
 
@@ -70,24 +70,50 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                    @endauth
+
+
         </div>
-    @endif
+
 
     <div class="content">
         <div class="title m-b-md">
            Admin
         </div>
-
+<div id="user_grid">
+</div>
 
     </div>
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('#user_grid').jtable({
+        title: 'List of Employees',
+        actions: {
+        listAction: 'response.php?action=list'
+        },
+        fields: {
+            name: {
+        title: 'Name',
+        width: '30%',
+        edit: false
+        },
+        email: {
+        title: 'Email',
+        width: '30%'
+        },
+        is_active: {
+        title: 'Is Active',
+        width: '20%'
+        },
+        is_admin: {
+        title: 'Is Admin',
+        width: '20%'
+        }
+    }
+});
+$('#user_grid').jtable('load');
+});
+</script>
