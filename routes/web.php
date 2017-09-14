@@ -24,8 +24,8 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/Admin', function () {
-    return view('Admin');
+Route::get('/admin', function () {
+    return view('admin');
 });
 
 Auth::routes();
