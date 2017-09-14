@@ -11,8 +11,6 @@ class TransactionTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Customer', 500)->create()->each(function($customer) {
-            $customer->transactions()->save(factory('App\Transaction', rand(2, 15)));
-        });
+        factory(App\Transaction::class, 500)->create();
     }
 }

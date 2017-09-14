@@ -64,7 +64,9 @@ $factory->define(App\Transaction::class, function (Faker $faker) {
 
     return [
         'outlet_id' => Outlet::inRandomOrder()->first()->id,
-        'customer_id' => Customer::inRandomOrder()->first()->id,
+        'customer_id' => function() {
+            return factory(App\Customer::class)->create()->id;
+        },
         'type' => $type,
         'spent' => $spent,
         'discount' => $discount,
