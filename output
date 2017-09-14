@@ -1,0 +1,278 @@
+
+> @ dev /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> npm run development
+
+
+> @ development /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
+
+ ERROR  Failed to compile with 1 errors11:32:45
+
+ error  in ./resources/assets/js/components/Example.vue
+
+Module build failed: Error: 
+
+Vue packages version mismatch:
+
+- vue@2.4.3
+- vue-template-compiler@2.4.2
+
+This may cause things to work incorrectly. Make sure to use the same version for both.
+If you are using vue-loader@>=10.0, simply update vue-template-compiler.
+If you are using vue-loader@<10.0 or vueify, re-installing vue-loader/vueify should bump vue-template-compiler to the latest.
+
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-template-compiler/index.js:8:9)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/parser.js:1:78)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/loader.js:3:13)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/index.js:1:80)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+
+ @ ./resources/assets/js/app.js 19:25-60
+ @ multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss
+
+                                                                                                    Asset     Size  Chunks                    Chunk Names
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1  20.1 kB          [emitted]         
+fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb    18 kB          [emitted]         
+ fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158  23.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512  45.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760   109 kB          [emitted]         
+                                                                                               /js/app.js   1.2 MB       0  [emitted]  [big]  /js/app
+                                                                                             /css/app.css   147 kB       0  [emitted]         /js/app
+
+> @ dev /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> npm run development
+
+
+> @ development /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
+
+ ERROR  Failed to compile with 1 errors12:53:17
+
+ error  in ./resources/assets/js/components/Example.vue
+
+Module build failed: Error: 
+
+Vue packages version mismatch:
+
+- vue@2.4.3
+- vue-template-compiler@2.4.2
+
+This may cause things to work incorrectly. Make sure to use the same version for both.
+If you are using vue-loader@>=10.0, simply update vue-template-compiler.
+If you are using vue-loader@<10.0 or vueify, re-installing vue-loader/vueify should bump vue-template-compiler to the latest.
+
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-template-compiler/index.js:8:9)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/parser.js:1:78)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/loader.js:3:13)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/index.js:1:80)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+
+ @ ./resources/assets/js/app.js 19:25-60
+ @ multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss
+
+                                                                                                    Asset     Size  Chunks                    Chunk Names
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1  20.1 kB          [emitted]         
+fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb    18 kB          [emitted]         
+ fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158  23.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512  45.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760   109 kB          [emitted]         
+                                                                                               /js/app.js   1.2 MB       0  [emitted]  [big]  /js/app
+                                                                                             /css/app.css   147 kB       0  [emitted]         /js/app
+
+> @ dev /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> npm run development
+
+
+> @ development /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
+
+ ERROR  Failed to compile with 1 errors12:59:31
+
+ error  in ./resources/assets/js/components/Example.vue
+
+Module build failed: Error: 
+
+Vue packages version mismatch:
+
+- vue@2.4.3
+- vue-template-compiler@2.4.2
+
+This may cause things to work incorrectly. Make sure to use the same version for both.
+If you are using vue-loader@>=10.0, simply update vue-template-compiler.
+If you are using vue-loader@<10.0 or vueify, re-installing vue-loader/vueify should bump vue-template-compiler to the latest.
+
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-template-compiler/index.js:8:9)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/parser.js:1:78)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/loader.js:3:13)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/index.js:1:80)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+
+ @ ./resources/assets/js/app.js 19:25-60
+ @ multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss
+
+                                                                                                    Asset     Size  Chunks                    Chunk Names
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1  20.1 kB          [emitted]         
+fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb    18 kB          [emitted]         
+ fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158  23.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512  45.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760   109 kB          [emitted]         
+                                                                                               /js/app.js   1.2 MB       0  [emitted]  [big]  /js/app
+                                                                                             /css/app.css   147 kB       0  [emitted]         /js/app
+
+> @ dev /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> npm run development
+
+
+> @ development /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
+
+ ERROR  Failed to compile with 1 errors12:59:44
+
+ error  in ./resources/assets/js/components/Example.vue
+
+Module build failed: Error: 
+
+Vue packages version mismatch:
+
+- vue@2.4.3
+- vue-template-compiler@2.4.2
+
+This may cause things to work incorrectly. Make sure to use the same version for both.
+If you are using vue-loader@>=10.0, simply update vue-template-compiler.
+If you are using vue-loader@<10.0 or vueify, re-installing vue-loader/vueify should bump vue-template-compiler to the latest.
+
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-template-compiler/index.js:8:9)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/parser.js:1:78)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/lib/loader.js:3:13)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+    at Module.require (module.js:568:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/node_modules/vue-loader/index.js:1:80)
+    at Module._compile (module.js:624:30)
+    at Object.Module._extensions..js (module.js:635:10)
+    at Module.load (module.js:545:32)
+    at tryModuleLoad (module.js:508:12)
+    at Function.Module._load (module.js:500:3)
+
+ @ ./resources/assets/js/app.js 19:25-60
+ @ multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss
+
+                                                                                                    Asset     Size  Chunks                    Chunk Names
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1  20.1 kB          [emitted]         
+fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb    18 kB          [emitted]         
+ fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158  23.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512  45.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760   109 kB          [emitted]         
+                                                                                               /js/app.js   1.2 MB       0  [emitted]  [big]  /js/app
+                                                                                             /css/app.css   147 kB       0  [emitted]         /js/app
+
+> @ dev /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> npm run development
+
+
+> @ development /mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js
+
+ DONE  Compiled successfully in 3966ms13:01:32
+
+                                                                                                    Asset     Size  Chunks                    Chunk Names
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1  20.1 kB          [emitted]         
+fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2?448c34a56d699c29117adc64c43affeb    18 kB          [emitted]         
+ fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff?fa2772327f55d8198301fdb8bcfc8158  23.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf?e18bbf611f2a2e43afc071aa2f4e1512  45.4 kB          [emitted]         
+  fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg?89889688147bd7575d6327160d64e760   109 kB          [emitted]         
+                                                                                               /js/app.js   1.2 MB       0  [emitted]  [big]  /js/app
+                                                                                             /css/app.css   147 kB       0  [emitted]         /js/app
