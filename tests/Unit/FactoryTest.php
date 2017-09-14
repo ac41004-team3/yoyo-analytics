@@ -30,7 +30,7 @@ class FactoryTest extends TestCase
 
     public function test_creates_at_least_hundred_transactions()
     {
-        $outlets = factory('App\Outlet', 21)->create();
+        factory('App\Outlet', 21)->create();
         $transactions = factory('App\Transaction', rand(100, 1000))->create();
 
         $this->assertTrue(count($transactions) >= 100);
