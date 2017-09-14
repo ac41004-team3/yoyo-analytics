@@ -26,10 +26,10 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'data' => 'required|mimes:csv',
+            'data.*' => 'mimes:csv',
         ];
 
-//        $request->validate($rules);
+        $request->validate($rules);
 
         $file = $request->file('data')->store('import');
 
