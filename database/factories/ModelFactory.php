@@ -16,7 +16,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Customer::class, function (Faker $faker) {
     return [
-        'id' => 'dusa-' . $faker->randomNumber(4)
+        'id' => 'dusa-' . $faker->unique()->randomNumber(4),
     ];
 });
 
@@ -64,6 +64,7 @@ $factory->define(App\Transaction::class, function (Faker $faker) {
 
     return [
         'outlet_id' => Outlet::inRandomOrder()->first()->id,
+        'customer_id' => Customer::inRandomOrder()->first()->id,
         'type' => $type,
         'spent' => $spent,
         'discount' => $discount,
