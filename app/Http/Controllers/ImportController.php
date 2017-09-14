@@ -19,11 +19,17 @@ class ImportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'data' => 'required|mimes:csv',
+        ];
+
+        $request->validate($rules);
+
+        $request->file('data')->store('import');
     }
 }
