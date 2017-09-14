@@ -22,7 +22,7 @@ $factory->define(App\Customer::class, function (Faker $faker) {
 
 $factory->define(App\Outlet::class, function (Faker $faker) {
     return [
-        'name' => $faker->randomElement([
+        'name' => $faker->unique()->randomElement([
             'Outlet Name',
             'Library',
             'Spare',
