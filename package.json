@@ -23,6 +23,7 @@
         "babel-cli": "^6.26.0",
         "npm": "^5.4.1",
         "vue-cli": "^2.8.2",
+        "vue-clip": "^1.0.0",
         "vue-template-compiler": "^2.4.3"
     }
 }

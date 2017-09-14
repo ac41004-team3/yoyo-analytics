@@ -8,11 +8,7 @@
                     <div class="panel-heading">Import Data</div>
 
                     <div class="panel-body">
-                        <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <input type="file" name="data" class="input-file">
-                            <input type="submit" value="Submit">
-                        </form>
+                        <import-data>v</import-data>
                     </div>
                 </div>
             </div>
