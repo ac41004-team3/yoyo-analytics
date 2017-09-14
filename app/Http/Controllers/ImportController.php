@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FileUploaded;
 use Illuminate\Http\Request;
 
 class ImportController extends Controller
@@ -28,8 +29,12 @@ class ImportController extends Controller
             'data' => 'required|mimes:csv',
         ];
 
-        $request->validate($rules);
+//        $request->validate($rules);
 
-        $request->file('data')->store('import');
+        $file = $request->file('data')->store('import');
+
+        event(new FileUploaded($file));
+
+        return view('import.index')->with(compact(['success' => true]));
     }
 }
