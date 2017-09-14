@@ -11,12 +11,15 @@
 
     <!-- Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/scripts/jquery-migrate-3.0.0.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    {{--<script src="/scripts/jquery-migrate-3.0.0.min.js"></script>--}}
+    {{--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
+    <script src="https://cdn.jsdelivr.net/vue/1.0.28/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
 
-    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-    <script src="/scripts/jtable.2.4.0/themes/metro/blue/jtable.min.css" type="text/css"> </script>
-    <script src="/scripts/jtable.2.4.0/jquery.jtable.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/vue.table/1.5.3/vue-table.min.js"></script>
+    {{--<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>--}}
+    {{--<script src="/scripts/jtable.2.4.0/themes/metro/blue/jtable.min.css" type="text/css"> </script>--}}
+    {{--<script src="/scripts/jtable.2.4.0/jquery.jtable.js"></script>--}}
 
 
     <!-- Styles -->
@@ -79,8 +82,11 @@
         <div class="title m-b-md">
            Admin
         </div>
+
+        <my-vuetable></my-vuetable>
+
         </div>
-        <div id="user_grid">
+    
 
     </div>
 
@@ -90,57 +96,79 @@
 </html>
 
 <script type="text/javascript">
-$( document ).ready(function() {
-   debugger;
-    $('#user_grid').jtable({
-        title: 'List of Users',
-        paging: true,
-        sorting: true,
 
-        actions: {
-//        listAction: 'response.php?action=list'
-            listAction:"{{ route('getData') }}",
-//            listAction: '/getData',
-            createAction: 'UserController/create',
-            updateAction: 'UserController/update',
-            deleteAction: 'UserController/delete'
+    new Vue({
+        el: '#user_grid',
+        data: {
+            columns: [
+                'name',
+                'email',
+                'id',
+                'created_date',
+                'updated_date',
+                'is_admin',
+                'is_active'
+            ],
+            itemActions: [
+                { name: 'view-item', label: '', icon: 'zoom icon', class: 'ui teal button' },
+                { name: 'edit-item', label: '', icon: 'edit icon', class: 'ui orange button'},
+                { name: 'delete-item', label: '', icon: 'delete icon', class: 'ui red button' }
+            ]
         },
-        fields: {
-            name: {
-        title: 'Name',
-        width: '25%',
-        edit: false
-        },
-        email: {
 
-            title: 'Email',
-             width: '25%'
-        },
-            id: {
-                title: 'id',
-                width: '25%'
-            },
-            created_at: {
 
-                title: 'created_at',
-                width: '25%'
-            },
-            updated_at: {
+    })
+{{--$( document ).ready(function() {--}}
+   {{--debugger;--}}
+    {{--$('#user_grid').jtable({--}}
+        {{--title: 'List of Users',--}}
+        {{--paging: true,--}}
+        {{--sorting: true,--}}
 
-                title: 'updated_at',
-                width: '25%'
-            },
-        is_active: {
-              title: 'Is Active',
-               width: '25%'
-        },
-        is_admin: {
-            title: 'Is Admin',
-            width: '25%'
-        }
-    }
-});
-    debugger;
-$('#user_grid').jtable('load');
-});
+        {{--actions: {--}}
+{{--//        listAction: 'response.php?action=list'--}}
+            {{--listAction:"{{ route('getData') }}",--}}
+{{--//            listAction: '/getData',--}}
+            {{--createAction: 'UserController/create',--}}
+            {{--updateAction: 'UserController/update',--}}
+            {{--deleteAction: 'UserController/delete'--}}
+        {{--},--}}
+        {{--fields: {--}}
+            {{--name: {--}}
+        {{--title: 'Name',--}}
+        {{--width: '25%',--}}
+        {{--edit: false--}}
+        {{--},--}}
+        {{--email: {--}}
+
+            {{--title: 'Email',--}}
+             {{--width: '25%'--}}
+        {{--},--}}
+            {{--id: {--}}
+                {{--title: 'id',--}}
+                {{--width: '25%'--}}
+            {{--},--}}
+            {{--created_at: {--}}
+
+                {{--title: 'created_at',--}}
+                {{--width: '25%'--}}
+            {{--},--}}
+            {{--updated_at: {--}}
+
+                {{--title: 'updated_at',--}}
+                {{--width: '25%'--}}
+            {{--},--}}
+        {{--is_active: {--}}
+              {{--title: 'Is Active',--}}
+               {{--width: '25%'--}}
+        {{--},--}}
+        {{--is_admin: {--}}
+            {{--title: 'Is Admin',--}}
+            {{--width: '25%'--}}
+        {{--}--}}
+    {{--}--}}
+{{--});--}}
+    {{--debugger;--}}
+{{--$('#user_grid').jtable('load');--}}
+{{--});--}}
 </script>
