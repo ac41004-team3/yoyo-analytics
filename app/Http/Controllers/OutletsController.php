@@ -7,15 +7,18 @@ use App\Outlet;
 
 class OutletsController extends Controller
 {
-	// Function for showing returning a specific outlet
-	public function index()
+	//Function for returning outlets
+	public function index() 
 	{
 		$outlets = Outlet::all();
-		return view('outlets.index', compact('outlets'));
+		return $outlets; //Returns JSON
+		//return view('outlets.index', compact('outlets'));
 	}
 	
-    /*public function show(Outlet $outlet)
+	//Find an outlet by name, as these will likely be selected from a menu or tick box
+    public function show(Outlet $outlet)
     {
-		$outlet = Outlet::find($id);
-	}*/
+		$outlet = Outlet::find($name);
+		return $outlet;
+	}
 }
