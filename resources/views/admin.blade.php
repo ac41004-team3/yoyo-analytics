@@ -10,11 +10,14 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script   src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script src="/scripts/jquery-migrate-3.0.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
     <script src="/scripts/jtable.2.4.0/themes/metro/blue/jtable.min.css" type="text/css"> </script>
     <script src="/scripts/jtable.2.4.0/jquery.jtable.js"></script>
+
 
     <!-- Styles -->
     <style>
@@ -90,10 +93,14 @@
 $( document ).ready(function() {
    debugger;
     $('#user_grid').jtable({
-        title: 'List of Employees',
+        title: 'List of Users',
+        paging: true,
+        sorting: true,
+
         actions: {
 //        listAction: 'response.php?action=list'
             listAction:"{{ route('getData') }}",
+//            listAction: '/getData',
             createAction: 'UserController/create',
             updateAction: 'UserController/update',
             deleteAction: 'UserController/delete'
@@ -101,25 +108,39 @@ $( document ).ready(function() {
         fields: {
             name: {
         title: 'Name',
-        width: '30%',
+        width: '25%',
         edit: false
         },
         email: {
-            key:true,
+
             title: 'Email',
-             width: '30%'
+             width: '25%'
         },
+            id: {
+                title: 'id',
+                width: '25%'
+            },
+            created_at: {
+
+                title: 'created_at',
+                width: '25%'
+            },
+            updated_at: {
+
+                title: 'updated_at',
+                width: '25%'
+            },
         is_active: {
               title: 'Is Active',
-               width: '20%'
+               width: '25%'
         },
         is_admin: {
             title: 'Is Admin',
-            width: '20%'
+            width: '25%'
         }
     }
 });
     debugger;
-//$('#user_grid').jtable('load');
+$('#user_grid').jtable('load');
 });
 </script>
