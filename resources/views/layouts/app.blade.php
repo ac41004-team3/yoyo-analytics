@@ -81,8 +81,8 @@
                     
                     
                     <ul class="">
-                        <li><a href="#"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
+                        <li><a href="{{route('home')}}"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
+                        <li><a href="{{route('analytics')}}"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-cog">&nbsp;</span>Options</a></li>
