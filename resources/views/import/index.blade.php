@@ -6,9 +6,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Import Data</div>
-
                     <div class="panel-body">
-                        <import-data>v</import-data>
+                        <import-data></import-data>
                     </div>
                 </div>
             </div>
