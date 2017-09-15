@@ -29,12 +29,17 @@ class ProcessUploadedFile
      */
     public function handle(FileUploaded $event)
     {
-        Log::debug('Starting import..');
-        foreach (file(storage_path('app/' . $event->path)) as $data) {
-            $transaction = $this->process($data);
-            Transaction::create($transaction);
-        }
-        Log::debug('Import finished!');
+        Excel::filter('chunk')->load(storage_path('app/' . $event->path))->chunk(200, function ($results) {
+            foreach ($results as $row) {
+                // associative array to indexed
+                $data = [];
+                foreach ($row as $entry) {
+                    array_push($data, $entry);
+                }
+                $transaction = $this->process($data);
+                Transaction::create($transaction);
+            }
+        });
     }
 
     private function process($data)
@@ -46,7 +51,6 @@ class ProcessUploadedFile
             'name' => $data[4]
         ]);
 
-        Log::debug($this->parseCurrency($data[7]));
         return [
             'customer_id' => $customer->id,
             'outlet_id' => $outlet->id,
@@ -62,5 +66,4 @@ class ProcessUploadedFile
     {
         return preg_replace('/[^0-9]/', '', $value);
     }
-
 }

@@ -6,6 +6,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class FileUploaded
 {
@@ -18,6 +19,7 @@ class FileUploaded
      */
     public function __construct($path)
     {
+        Log::debug('EVENT::FileUploaded');
         $this->path = $path;
     }
 

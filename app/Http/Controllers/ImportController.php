@@ -34,7 +34,6 @@ class ImportController extends Controller
         $file = $request->file('data')->store('import');
 
         event(new FileUploaded($file));
-
-        return view('import.index')->with(compact(['success' => true]));
+        return $request->ajax('success');
     }
 }
