@@ -17,7 +17,7 @@ class Transaction extends Model
 
     public function outlet()
     {
-        $this->hasOne('App\Outlet');
+        return $this->hasOne('App\Outlet');
     }
 
     public function customer()
