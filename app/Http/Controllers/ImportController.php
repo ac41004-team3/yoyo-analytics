@@ -26,7 +26,7 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'data.*' => 'mimes:csv',
+            'data.*' => 'mimes:csv|max:10240',
         ];
 
         $request->validate($rules);
