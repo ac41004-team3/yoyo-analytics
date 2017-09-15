@@ -24,11 +24,14 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+//Route::get('/admin', function () {
+//    $users = \App\User::all();
+//
+//    return view('admin')->with(compact('users'));
+//});
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/admin', 'UserController@getData')->name('admin');
