@@ -77,7 +77,7 @@
             </div>
                 
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/owl.jpg')}}">
                 <p>Night Owls</p>  
             </div>
             
