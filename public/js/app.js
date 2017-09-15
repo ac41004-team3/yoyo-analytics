@@ -42007,7 +42007,7 @@ var Component = __webpack_require__(8)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/thms/Dropbox/Projects/yoyo-analytics/resources/assets/js/components/Example.vue"
+Component.options.__file = "/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42113,7 +42113,7 @@ var Component = __webpack_require__(8)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/thms/Dropbox/Projects/yoyo-analytics/resources/assets/js/components/ImportData.vue"
+Component.options.__file = "/mnt/c/Users/thomasneill/PhpstormProjects/yoyo-analytics/resources/assets/js/components/ImportData.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImportData.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42171,7 +42171,7 @@ exports = module.exports = __webpack_require__(43)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -42553,6 +42553,8 @@ exports.default = {
 //
 //
 //
+
+//TODO: Add csrf token to http request
 
 /***/ }),
 /* 47 */
