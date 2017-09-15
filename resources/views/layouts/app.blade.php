@@ -58,12 +58,16 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                                 <span class="glyphicon glyphicon-log-out"></span>
+                                             Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                    <a href="{{route('settings')}}"><span class="glyphicon glyphicon-cog"></span> Settings</a>
                                     </li>
                                 </ul>
                             </li>
@@ -84,7 +88,6 @@
                         <li><a href="{{route('analytics')}}"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
                         <li><a href="{{route('browse')}}"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
                         <li><a href="{{route('upload')}}"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
-                        <li><a href="{{route('settings')}}"><span class="glyphicon glyphicon-cog">&nbsp;</span>Settings</a></li>
                     </ul>
                     
                     
