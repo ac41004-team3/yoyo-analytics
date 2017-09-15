@@ -9,22 +9,22 @@
             <p><h1><u>Charts</u>:</h1> Select your chart</p>
         <div class="row">
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/line-graphic.svg')}}">
                 <p>Line</p>
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/bar-chart.svg')}}">
                 <p>Bar</p>
             </div>
                 
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/pie-chart.svg')}}">
                 <p>Pie</p> 
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/abc.svg')}}">
                 <p>Spatial</p>
             </div>
         </div>
@@ -67,22 +67,22 @@
              </div>
                 
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="{{ URL::asset('/images/whale.jpg')}}">
+                <img src="{{ URL::asset('/images/whale.svg')}}">
                 <p>Whales</p>
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/chicken.svg')}}">
                 <p>Early Birds</p>
             </div>
                 
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="{{ URL::asset('/images/owl.jpg')}}">
+                <img src="{{ URL::asset('/images/owlface.svg')}}">
                 <p>Night Owls</p>  
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
-                <img src="">
+                <img src="{{ URL::asset('/images/boss.svg')}}">
                 <p>Creatures of Habit</p> 
             </div>
          </div>
