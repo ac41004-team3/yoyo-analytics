@@ -10,22 +10,22 @@
         <div class="row">
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
-                <p>Line Graph</p>
+                <p>Line</p>
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
-                <p>Bar Chart</p>
+                <p>Bar</p>
             </div>
                 
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
-                <p>Pie Chart</p> 
+                <p>Pie</p> 
             </div>
             
             <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
-                <p>Spatial Chart</p>
+                <p>Spatial</p>
             </div>
         </div>
         </div>
@@ -43,19 +43,19 @@
                  <p><b>Outlets</b></p>
              </div>
              
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 one
             </div>
             
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 two
             </div>
                 
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
               three  
             </div>
             
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
               four  
             </div>
          </div>
@@ -66,22 +66,22 @@
                  <p><b>Tribes</b></p>
              </div>
                 
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="{{ URL::asset('/images/whale.jpg')}}">
                 <p>Whales</p>
             </div>
             
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
                 <p>Early Birds</p>
             </div>
                 
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
                 <p>Night Owls</p>  
             </div>
             
-            <div class="col-sm-3 selectionBox">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 selectionBox">
                 <img src="">
                 <p>Creatures of Habit</p> 
             </div>
