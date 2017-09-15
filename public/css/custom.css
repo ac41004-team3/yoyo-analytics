@@ -7,8 +7,8 @@
 
 .selectionBox img {
     transition: 1s ease;
-    max-height: 90%;
-    max-width: 90%;
+    height: 50%;
+    width: 50%;
 }
 
 .selectionBox img:hover{
