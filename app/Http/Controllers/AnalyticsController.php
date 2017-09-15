@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class analyticsController extends Controller
+class AnalyticsController extends Controller
 {
      /**
      * Show the application dashboard.
