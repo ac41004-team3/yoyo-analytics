@@ -7,7 +7,6 @@ use App\Events\FileUploaded;
 use App\Outlet;
 use App\Transaction;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessUploadedFile
@@ -38,7 +37,10 @@ class ProcessUploadedFile
                     array_push($data, $entry);
                 }
                 $transaction = $this->process($data);
-                Transaction::create($transaction);
+                Transaction::updateOrCreate([
+                    'date' => $transaction['date'],
+                    'customer_id' => $transaction['customer_id']
+                ], $transaction);
             }
         });
     }
