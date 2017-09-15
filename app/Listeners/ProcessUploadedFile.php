@@ -8,6 +8,7 @@ use App\Outlet;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessUploadedFile
 {
@@ -44,8 +45,6 @@ class ProcessUploadedFile
 
     private function process($data)
     {
-        $data = explode(';', $data);
-
         $customer = Customer::updateOrCreate(['id' => $data[5]]);
         $outlet = Outlet::updateOrCreate(['id' => $data[2]], [
             'name' => $data[4]
@@ -58,7 +57,7 @@ class ProcessUploadedFile
             'type' => $data[6],
             'spent' => $this->parseCurrency($data[7]),
             'discount' => $this->parseCurrency($data[8]),
-            'total' => $this->parseCurrency($data[9]),
+            'total' => $this->parseCurrency($data[7]) + $this->parseCurrency($data[8]),
         ];
     }
 
