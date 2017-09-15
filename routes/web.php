@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/analytics', 'AnalyticsController@index')->name('analytics');
+Route::get('/browse', 'BrowseController@index')->name('browse');
+Route::get('/upload', 'UploadController@index')->name('upload');
+Route::get('/settings', 'SettingsController@index')->name('settings');
