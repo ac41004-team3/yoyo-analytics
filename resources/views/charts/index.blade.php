@@ -13,6 +13,8 @@
     <div style="width:75%; height:50%;">
         <canvas id="myChart" width="100" height="100"></canvas>
         <script>
+        //Basically an enum and can be treated syntaxically as such,
+        //but sadly I can't statically type in Javascript :(
         var outletID = {    DJCAD_CANTINA: 235,
                             AIR_BAR: 236,
                             FLOOR_FIVE: 237,
@@ -28,13 +30,12 @@
                             COLLEGE_SHOP: 2677,
                             NINEWELLS_SHOP: 2679
                         };
-        //Basically an enum and can be treated syntaxically as such,
-                                                            //but sadly I can't statically type in Javascript :(
         var currentChart = { //Object which holds data on current chart, modify using setter methods
             type: null,
             data: null//This'll be an object within object
         };
         //console.log(currentChart.data);
+        //Temporary chart for example
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, { //PlaceHolder Chart
             type: 'bar',
