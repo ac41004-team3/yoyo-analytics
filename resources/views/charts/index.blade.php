@@ -5,12 +5,15 @@
     <title></title>
 </head>
 <body>
-    <button id="changeToLine">Press Me!</button>
+    <button id="Line" onclick="changeChartType('line')">Line</button>
+    <button id="Bar" onclick="changeChartType('bar')">Bar</button>
+    <button id="Pie" onclick="changeChartType('pie')">Pie</button>
+    <button id="Spatial" onclick="changeChartType('radar')">Spatial</button>
     <div style="width:75%; height:50%;">
         <canvas id="myChart" width="100" height="100"></canvas>
         <script>
         var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
+        var myChart = new Chart(ctx, { //PlaceHolder Chart
             type: 'bar',
             data: {
                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -46,13 +49,12 @@
                 }
             }
         });
-
-        document.getElementById('changeToLine').onclick = function() {
+        function changeChartType(chartType) {
             myChart.destroy();
             myChart = new Chart(ctx, {
-                type: 'line'
+                type: chartType
             });
-        };
+        }
         </script>
     </div>
 </body>
