@@ -28,17 +28,27 @@ class UserController extends Controller
     {
         $id = $request->input('activate');
         $user= User::find($id);
+
         $user->is_active = 1;
         $user->save();
 
         return $this->getData();
     }
 
-    public function deactivateUser(Request $request)
+    public function update(Request $request)
     {
-        $id = $request->input('deactivate');
+        $id = $request->input('userid');
+        $is_active = $request->input('is_active');
+       // dd($is_active);
+
         $user= User::find($id);
+        if($is_active ==="on") {
+            $user->is_active = 1;
+        }
+        else
+        {
         $user->is_active = 0;
+        }
         $user->save();
 
         return $this->getData();
