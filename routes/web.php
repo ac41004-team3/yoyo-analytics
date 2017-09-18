@@ -34,7 +34,6 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-<<<<<<< HEAD
 Route::any('/admin', 'UserController@getData')->name('admin');
 //Route::post('/activate/{id}', 'UserController@activateUser')->name('activate');
 Route::post('/activate', 'UserController@activateUser')->name('activate');
@@ -48,9 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/import', 'ImportController@store');
 });
 
-=======
 Route::get('/analytics', 'AnalyticsController@index')->name('analytics');
 Route::get('/browse', 'BrowseController@index')->name('browse');
 Route::get('/upload', 'UploadController@index')->name('upload');
 Route::get('/settings', 'SettingsController@index')->name('settings');
->>>>>>> dashboard
