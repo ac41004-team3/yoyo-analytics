@@ -35,3 +35,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::any('/admin', 'UserController@getData')->name('admin');
+//Route::post('/activate/{id}', 'UserController@activateUser')->name('activate');
+Route::post('/activate', 'UserController@activateUser')->name('activate');
+Route::post('/deactivate', 'UserController@deactivateUser')->name('deactivate');
