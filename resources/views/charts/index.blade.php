@@ -73,7 +73,7 @@
         //console.log(currentChart.data);
         //Temporary chart for example
         var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, { //PlaceHolder Chart
+        /*var myChart = new Chart(ctx, { //PlaceHolder Chart
             type: 'bar',
             data: {
                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -100,7 +100,8 @@
                     }]
                 }
             }
-        });
+        });*/
+        var myChart;
         function changeChartType(chartType) {
             /*myChart.destroy();
             myChart = new Chart(ctx, {
@@ -173,10 +174,44 @@
             }
 			var metricCalculation = {};
 			var lastTime;
+            var reset = false;
 			var sum = 0;
             for (i in transactions)
             {
                 //document.write(transactions[i].date + "<br />");
+                if (moment(currentChart.timePeriod[0]).add(1, 'year').isisSameOrAfter(currentChart.timePeriod[1]))
+                {
+                    if (lastTime !== moment(transactions[i].date).format('YYYY'))
+                    {
+                        reset = true;
+                    }
+                    lastTime = moment(transactions[i].date).format('YYYY');
+                }
+                else if (moment(currentChart.timePeriod[0]).add(1, 'months').isisSameOrAfter(currentChart.timePeriod[1]))
+                {
+                    if (lastTime !== moment(transactions[i].date).format('MMMM'))
+                    {
+                        reset = true;
+                    }
+                    lastTime = moment(transactions[i].date).format('MMMM');
+                }
+                else if (moment(currentChart.timePeriod[0]).add(1, 'days').isisSameOrAfter(currentChart.timePeriod[1]))
+                {
+                    if (lastTime !== moment(transactions[i].date).format('dddd'))
+                    {
+                        reset = true;
+                    }
+                    lastTime = moment(transactions[i].date).format('dddd');
+                }
+                else if (moment(currentChart.timePeriod[0]).add(1, 'hour').isisSameOrAfter(currentChart.timePeriod[1]))
+                {
+                    lastTime = 'Last Hour';
+                }
+                if (reset === true)
+                {
+                    sum = 0;
+                    reset = false;
+                }
                 if (moment(transactions[i].date).isBetween(currentChart.timePeriod[0], currentChart.timePeriod[1]))
                 {
         			switch (currentChart.metric) {
@@ -187,24 +222,8 @@
         				console.log('An error occured whilst calculating');
         				break;
         			}
-                    if (moment(currentChart.timePeriod[0]).add(1, 'year').isisSameOrAfter(currentChart.timePeriod[1]))
-                    {
-                        lastTime = moment(transactions[i].date).format('YYYY');
-                    }
-                    else if (moment(currentChart.timePeriod[0]).add(1, 'months').isisSameOrAfter(currentChart.timePeriod[1]))
-                    {
-                        lastTime = moment(transactions[i].date).format('MMMM');
-                    }
-                    else if (moment(currentChart.timePeriod[0]).add(1, 'days').isisSameOrAfter(currentChart.timePeriod[1]))
-                    {
-                        lastTime = moment(transactions[i].date).format('dddd');
-                    }
-                    else if (moment(currentChart.timePeriod[0]).add(1, 'hour').isisSameOrAfter(currentChart.timePeriod[1]))
-                    {
-                        lastTime = 'Last Hour';
-                    }
-                    metricCalculation[lastTime] = sum;
                 }
+                metricCalculation[lastTime] = sum;
             }
             return metricCalculation;
 		}
