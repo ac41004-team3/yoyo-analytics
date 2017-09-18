@@ -15,8 +15,29 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+//Route::get('/admin', function () {
+//    $users = \App\User::all();
+//
+//    return view('admin')->with(compact('users'));
+//});
+
+
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/admin', 'UserController@getData')->name('admin');
+//Route::post('/activate/{id}', 'UserController@activateUser')->name('activate');
+Route::post('/activate', 'UserController@activateUser')->name('activate');
+Route::post('/deactivate', 'UserController@deactivateUser')->name('deactivate');
 
 
 Route::group(['middleware' => 'auth'], function () {
