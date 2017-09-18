@@ -37,6 +37,11 @@
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
+		console.log(transactions);
+		for (i in transactions)
+		{
+			document.write(transactions[i].date + "<br />");
+		}
 		var metricEnum = { TRANSTOTAL: 1, DISCTOTAL: 2, SPENTTOTAL: 3, TRANSCOUNT: 4 };
 		Object.freeze(metricEnum);
         //Basically an enum and can be treated syntaxically as such,
@@ -62,6 +67,7 @@
             data: null, //This'll be an object within object
             metric: null,
             timePeriod: [null, null], //Lower Bound, Now
+            periodDefinition: null,
             outlets: []
         };
         //console.log(currentChart.data);
@@ -119,6 +125,7 @@
 			console.log(currentChart.outlets);
         }
         function setTimePeriod(time) {
+			currentChart.periodDefintion = time;
 			var now = moment().format("YYYY-MM-DD HH:mm:ss");
 			console.log(now);
 			var lowerBound;
@@ -158,6 +165,27 @@
 		}
 		function buildChart() {
 			
+		}
+		function calculateMetric() {
+			var metricCalculation = {};
+			var currentTime;
+			var sum = 0;
+			switch (currentChart.metric) {
+				case 1://Transaction Total
+				for (i in transactions)
+				{
+					//document.write(transactions[i].date + "<br />");
+					if (moment(transactions[i].date).isBetween(timePeriod[0], timePeriod[1]) && currentChart.outlets.indexOf(transactions[i].outlet_id) !== -1)
+					{
+						sum += transactions[i].total;
+					}
+				}
+				metricCalculation['last hour'] = sum;
+				break;
+				default:
+				console.log('An error occured whilst calculating');
+				break;
+			}
 		}
         </script>
     </div>
