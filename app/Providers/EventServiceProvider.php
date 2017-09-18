@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\FileUploaded' => [
             'App\Listeners\ProcessUploadedFile',
         ],
+        'App\Events\UserRegistered' => [
+            'App\Listeners\NotifyRegistered',
+            'App\Listeners\AdminNotifyRegistered',
+        ],
     ];
 
     /**
