@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOutletsTable extends Migration
 {
@@ -18,6 +18,22 @@ class CreateOutletsTable extends Migration
             $table->string('name')->unique();
             $table->timestamps();
         });
+
+        Schema::create('outlet_user', function (Blueprint $table) {
+            $table->integer('outlet_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+
+            $table->primary(['outlet_id', 'user_id']);
+
+            $table->foreign('outlet_id')
+                ->references('id')
+                ->on('outlets')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
     }
 
     /**
@@ -28,5 +44,6 @@ class CreateOutletsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('outlets');
+        Schema::dropIfExists('outlet_user');
     }
 }

@@ -15,33 +15,34 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $roles = [
-            'super-admin' => [],
             'admin' => [
-                'manage-user',
+                'manage-users',
                 'manage-data',
-                'manage-branch',
+                'manage-branches',
             ],
-            'manager' => [],
+            'manager' => [
+                'manage-assigned-branches',
+            ],
             'user' => [
-                'view-branch'
+                'view-assigned-branches',
             ],
         ];
 
         // TODO: Set in .env
-        $super_admin = User::create([
-            'name' => 'Super Admin',
+        $admin = User::create([
+            'name' => 'Admin',
             'email' => 'admin@dusa.co.uk',
             'password' => bcrypt('password'),
         ]);
 
         foreach ($roles as $name => $permissions) {
-            $role = Role::create(['name' => $name]);
+            $role = Role::updateOrCreate(['name' => $name]);
             foreach ($permissions as $item) {
-                $permission = Permission::create(['name' => $item]);
+                $permission = Permission::updateOrCreate(['name' => $item]);
                 $role->givePermissionTo($permission);
             }
         }
 
-        $super_admin->assignRole('super-admin');
+        $admin->assignRole('admin');
     }
 }
