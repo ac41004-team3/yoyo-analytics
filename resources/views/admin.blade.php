@@ -93,7 +93,7 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Admin</th>
+                <th>Role</th>
                 <th>Active</th>
 
 
@@ -102,30 +102,24 @@
            <tr>
                <td>{{ $user->name }}</td>
                <td>{{ $user->email }}</td>
-               @if ( $user->is_admin ===1)
-                   <td>Yes</td>
+               <form method="POST" action = "{{ route('updateUser') }}">
+               <td>
+                   <select value="{{ $user->role }}" name="role" id="role">
+                        <option></option>
+                       <option>admin</option>
+                       <option>manager</option>
+                       <option>basic user</option>
+                   </select>
+               </td>
 
-               @else
-                   <td>No</td>
-
-               @endif
-
-              @if ( $user->is_active ===1)
-
-               <td style="background-color: greenyellow">Yes</td>
-                   <form method="POST" action = "{{ route('deactivate' ) }}">
-                       <td ><button name="deactivate" id="deactivate" value={{ $user->id }}>Deactivate User</button> </td>
-                       {{ csrf_field() }}
-                   </form>
-               @else
-                   <td style="background-color: darkorange">No</td>
-                <form method="POST" action = "{{ route('activate' ) }}">
-                   <td ><button type ="submit" name="activate" id="activate" value="{{ $user->id }}">Activate User</button> </td>
-                    {{ csrf_field() }}
-
-                </form>
-               @endif
-
+                   @if ( $user->is_active ===1)
+                       <td> <input type="checkbox" name="is_active" checked></td>
+                   @else
+                       <td> <input type="checkbox" name="is_active" ></td>
+                   @endif
+             <td><button type="submit" value ='{{ $user->id }}' name="userid" > Update </button></td>
+                   {{ csrf_field() }}
+               </form>
 
            </tr>
         @endforeach
