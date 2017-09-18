@@ -2,6 +2,7 @@
 <html>
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <title></title>
 </head>
 <body>
@@ -15,6 +16,12 @@
     <button id="" onclick="setMetric(2)">Discount Total</button>
     <button id="" onclick="setMetric(3)">Spent Total</button>
     <button id="" onclick="setMetric(4)">Transaction Count</button>
+    <br>
+    <br>
+    <button id="" onclick=""></button>
+    <button id="" onclick=""></button>
+    <button id="" onclick=""></button>
+    <button id="" onclick=""></button>
     <br>
     <br>
     @foreach ($outlets as $outlet)
@@ -49,9 +56,9 @@
                         };
         var currentChart = { //Object which holds data on current chart, modify using setter methods
             type: null,
-            data: null//This'll be an object within object
-            ,metric: null,
-            timePeriod: null
+            data: null, //This'll be an object within object
+            metric: null,
+            timePeriod: null //1 day, 1 week, 4 week, 12 week, 1 year, all time
         };
         //console.log(currentChart.data);
         //Temporary chart for example
@@ -105,21 +112,11 @@
 			console.log(outletID);
 			
         }
-        function modifyTimePeriod() {
-			
-		}
-		function modifyMeasurement() {
+        function setTimePeriod() {
 			
 		}
 		function setMetric(metric) {
-			switch(metric) {
-				case metricEnum.TRANSTOTAL:
-				break;
-				default:
-				console.log('An error occured when attempting to change the type of metric');
-				break;
-				
-			}
+			currentChart.metric = metric;
 		}
         </script>
     </div>
