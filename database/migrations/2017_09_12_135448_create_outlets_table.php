@@ -15,7 +15,7 @@ class CreateOutletsTable extends Migration
     {
         Schema::create('outlets', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
