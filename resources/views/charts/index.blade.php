@@ -33,7 +33,7 @@
     <div style="width:75%; height:50%;">
         <canvas id="myChart" width="100" height="100"></canvas>
         <script>
-		//I will probably load in all data by default and simply trip the hidden:true|false	
+		//I will probably load in all data by default and simply trip the hidden:true|false
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
@@ -120,7 +120,7 @@
         }
         function addOutlet(outletID) {
 			console.log(outletID);
-			//if element exists push it on 
+			//if element exists push it on
 			currentChart.outlets.indexOf(outletID) === -1 ? currentChart.outlets.push(outletID) : currentChart.outlets.splice(currentChart.outlets.indexOf(outletID), 1);
 			console.log(currentChart.outlets);
         }
@@ -158,34 +158,56 @@
 			}
 			currentChart.timePeriod[0] = lowerBound;
 			currentChart.timePeriod[1] = now;
-			
+
 		}
 		function setMetric(metric) {
 			currentChart.metric = metric;
 		}
 		function buildChart() {
-			
+            myChart.destroy();
 		}
-		function calculateMetric() {
+		function calculateMetric(currentOutletID) {
+            if (currentChart.outlets.indexOf(currentOutletID) !== -1)
+            {
+                return;
+            }
 			var metricCalculation = {};
-			var currentTime;
+			var lastTime;
 			var sum = 0;
-			switch (currentChart.metric) {
-				case 1://Transaction Total
-				for (i in transactions)
-				{
-					//document.write(transactions[i].date + "<br />");
-					if (moment(transactions[i].date).isBetween(timePeriod[0], timePeriod[1]) && currentChart.outlets.indexOf(transactions[i].outlet_id) !== -1)
-					{
-						sum += transactions[i].total;
-					}
-				}
-				metricCalculation['last hour'] = sum;
-				break;
-				default:
-				console.log('An error occured whilst calculating');
-				break;
-			}
+            for (i in transactions)
+            {
+                //document.write(transactions[i].date + "<br />");
+                if (moment(transactions[i].date).isBetween(timePeriod[0], timePeriod[1]))
+                {
+        			switch (currentChart.metric) {
+        				case 1://Transaction Total
+        				sum += transactions[i].total;
+        				break;
+        				default:
+        				console.log('An error occured whilst calculating');
+        				break;
+        			}
+                    /*(switch (currentChart.periodDefintion) {// ok actually lets use a checker to check the gap between them instead of this to check for custom dates
+                        case 'last hour':
+                        lastTime = 'Last Hour';
+        				break;
+        				case 'last day':
+                        lastTime = moment(transactions[i].date).format('dddd');
+        				break;
+        				case 'last week':
+                        lastTime = moment(transactions[i].date).format('dddd');
+        				break;
+        				case 'all time':
+                        lastTime = moment(transactions[i].date).format('YYYY');
+        				break;
+        				default:
+                        lastTime = moment(transactions[i].date).format('MMMM');
+        				break;
+                    }*/
+                    metricCalculation[lastTime] = sum;
+                }
+            }
+            return metricCalculation;
 		}
         </script>
     </div>
