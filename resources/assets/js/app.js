@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('import-data', require('./components/ImportData.vue'));
 
 const app = new Vue({
     el: '#app'

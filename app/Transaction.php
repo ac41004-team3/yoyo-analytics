@@ -9,6 +9,7 @@ class Transaction extends Model
     protected $fillable = [
         'outlet_id',
         'customer_id',
+        'date',
         'type',
         'spent',
         'discount',
