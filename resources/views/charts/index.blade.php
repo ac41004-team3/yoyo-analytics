@@ -10,11 +10,26 @@
     <button id="Pie" onclick="changeChartType('pie')">Pie</button>
     <button id="Spatial" onclick="changeChartType('radar')">Spatial</button>
     <br>
+    <br>
+    <button id="" onclick="">Transaction Total</button>
+    <button id="" onclick="">Discount Total</button>
+    <button id="" onclick="">Spent Total</button>
+    <button id="" onclick="">Transaction Count</button>
+    <br>
+    <br>
+    @foreach ($outlets as $outlet)
+		<button id="{{ $outlet->id }}" onclick="addOutlet({{ $outlet->id }})">{{ $outlet->name }}</button>
+    @endforeach
     <div style="width:75%; height:50%;">
         <canvas id="myChart" width="100" height="100"></canvas>
         <script>
+		//I will probably load in all data by default and simply trip the hidden:true|false	
+		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
+		var transactions = {!! json_encode($transactions->toArray()) !!};
+		var customers = {!! json_encode($customers->toArray()) !!};
         //Basically an enum and can be treated syntaxically as such,
         //but sadly I can't statically type in Javascript :(
+        //I may actually get rid of this, it might not be that useful.
         var outletID = {    DJCAD_CANTINA: 235,
                             AIR_BAR: 236,
                             FLOOR_FIVE: 237,
@@ -82,9 +97,19 @@
             }
             return color;
         }
-        function addOutlet(outletName) {
-
+        function addOutlet(outletID) {
+			console.log(outletID);
+			
         }
+        function modifyTimePeriod() {
+			
+		}
+		function modifyMeasurement() {
+			
+		}
+		function setMetric() {
+			
+		}
         </script>
     </div>
 </body>
