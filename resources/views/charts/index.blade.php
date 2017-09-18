@@ -18,10 +18,13 @@
     <button id="" onclick="setMetric(4)">Transaction Count</button>
     <br>
     <br>
-    <button id="" onclick=""></button>
-    <button id="" onclick=""></button>
-    <button id="" onclick=""></button>
-    <button id="" onclick=""></button>
+    <button id="" onclick="setTimePeriod('last hour')">Last Hour</button>
+    <button id="" onclick="setTimePeriod('last day')">Last Day</button>
+    <button id="" onclick="setTimePeriod('last week')">Last Week</button>
+    <button id="" onclick="setTimePeriod('last month')">Last Month</button>
+    <button id="" onclick="setTimePeriod('last three months')">Last Three Months</button>
+    <button id="" onclick="setTimePeriod('last year')">Last Year</button>
+    <button id="" onclick="setTimePeriod('all time')">All Time</button>
     <br>
     <br>
     @foreach ($outlets as $outlet)
@@ -112,8 +115,24 @@
 			console.log(outletID);
 			
         }
-        function setTimePeriod() {
-			
+        function setTimePeriod(time) {
+			case 'last hour':
+			break;
+			case 'last day':
+			break;
+			case 'last week':
+			break;
+			case 'last month':
+			break;
+			case 'last three months':
+			break;
+			case 'last year':
+			break;
+			case 'all time':
+			break;
+			default:
+			console.log('An invalid time period was recieved');
+			break;
 		}
 		function setMetric(metric) {
 			currentChart.metric = metric;
