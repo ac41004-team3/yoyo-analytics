@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,17 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index')->with('users', User::all());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.users.index')->with('users', User::all());
     }
 
     /**
@@ -35,7 +26,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return User::create($request->all());
     }
 
     /**
@@ -57,7 +48,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.users.edit')->with('user', $user);
     }
 
     /**
@@ -69,7 +60,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $role = Role::findOrFail($request->input('role'));
+        $user->update(['name' => $request->input('name'), 'email' => $request->input('email')]);
+        $user->syncRoles($role);
+        return redirect()->route('admin.users.index');
     }
 
     /**
