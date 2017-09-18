@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/welcome', function () {
@@ -38,3 +38,12 @@ Route::any('/admin', 'UserController@getData')->name('admin');
 //Route::post('/activate/{id}', 'UserController@activateUser')->name('activate');
 Route::post('/activate', 'UserController@activateUser')->name('activate');
 Route::post('/deactivate', 'UserController@deactivateUser')->name('deactivate');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/import', 'ImportController@index')->name('import');
+    Route::post('/import', 'ImportController@store');
+});
+
