@@ -61,7 +61,8 @@
             type: null,
             data: null, //This'll be an object within object
             metric: null,
-            timePeriod: null //1 day, 1 week, 4 week, 12 week, 1 year, all time
+            timePeriod: [null, null], //Lower Bound, Now
+            outlets: []
         };
         //console.log(currentChart.data);
         //Temporary chart for example
@@ -113,29 +114,50 @@
         }
         function addOutlet(outletID) {
 			console.log(outletID);
-			
+			//if element exists push it on 
+			currentChart.outlets.indexOf(outletID) === -1 ? currentChart.outlets.push(outletID) : currentChart.outlets.splice(currentChart.outlets.indexOf(outletID), 1);
+			console.log(currentChart.outlets);
         }
         function setTimePeriod(time) {
-			case 'last hour':
-			break;
-			case 'last day':
-			break;
-			case 'last week':
-			break;
-			case 'last month':
-			break;
-			case 'last three months':
-			break;
-			case 'last year':
-			break;
-			case 'all time':
-			break;
-			default:
-			console.log('An invalid time period was recieved');
-			break;
+			var now = moment().format("YYYY-MM-DD HH:mm:ss");
+			console.log(now);
+			var lowerBound;
+			switch (time)
+			{
+				case 'last hour':
+				lowerBound = moment().subtract(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'last day':
+				lowerBound = moment().subtract(1, 'days').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'last week':
+				lowerBound = moment().subtract(1, 'week').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'last month':
+				lowerBound = moment().subtract(1, 'month').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'last three months':
+				lowerBound = moment().subtract(3, 'month').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'last year':
+				lowerBound = moment().subtract(1, 'year').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				case 'all time':
+				lowerBound = moment('2010-01-01T00:00:00.000').format("YYYY-MM-DD HH:mm:ss");
+				break;
+				default:
+				console.log('An invalid time period was recieved');
+				break;
+			}
+			currentChart.timePeriod[0] = lowerBound;
+			currentChart.timePeriod[1] = now;
+			
 		}
 		function setMetric(metric) {
 			currentChart.metric = metric;
+		}
+		function buildChart() {
+			
 		}
         </script>
     </div>
