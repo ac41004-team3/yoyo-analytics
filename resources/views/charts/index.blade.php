@@ -11,10 +11,10 @@
     <button id="Spatial" onclick="changeChartType('radar')">Spatial</button>
     <br>
     <br>
-    <button id="" onclick="">Transaction Total</button>
-    <button id="" onclick="">Discount Total</button>
-    <button id="" onclick="">Spent Total</button>
-    <button id="" onclick="">Transaction Count</button>
+    <button id="" onclick="setMetric(1)">Transaction Total</button>
+    <button id="" onclick="setMetric(2)">Discount Total</button>
+    <button id="" onclick="setMetric(3)">Spent Total</button>
+    <button id="" onclick="setMetric(4)">Transaction Count</button>
     <br>
     <br>
     @foreach ($outlets as $outlet)
@@ -27,6 +27,8 @@
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
+		var metricEnum = { TRANSTOTAL: 1, DISCTOTAL: 2, SPENTTOTAL: 3, TRANSCOUNT: 4 };
+		Object.freeze(metricEnum);
         //Basically an enum and can be treated syntaxically as such,
         //but sadly I can't statically type in Javascript :(
         //I may actually get rid of this, it might not be that useful.
@@ -48,6 +50,8 @@
         var currentChart = { //Object which holds data on current chart, modify using setter methods
             type: null,
             data: null//This'll be an object within object
+            ,metric: null,
+            timePeriod: null
         };
         //console.log(currentChart.data);
         //Temporary chart for example
@@ -107,8 +111,15 @@
 		function modifyMeasurement() {
 			
 		}
-		function setMetric() {
-			
+		function setMetric(metric) {
+			switch(metric) {
+				case metricEnum.TRANSTOTAL:
+				break;
+				default:
+				console.log('An error occured when attempting to change the type of metric');
+				break;
+				
+			}
 		}
         </script>
     </div>
