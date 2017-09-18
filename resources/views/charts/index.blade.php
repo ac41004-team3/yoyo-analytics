@@ -177,7 +177,7 @@
             for (i in transactions)
             {
                 //document.write(transactions[i].date + "<br />");
-                if (moment(transactions[i].date).isBetween(timePeriod[0], timePeriod[1]))
+                if (moment(transactions[i].date).isBetween(currentChart.timePeriod[0], currentChart.timePeriod[1]))
                 {
         			switch (currentChart.metric) {
         				case 1://Transaction Total
@@ -187,23 +187,22 @@
         				console.log('An error occured whilst calculating');
         				break;
         			}
-                    /*(switch (currentChart.periodDefintion) {// ok actually lets use a checker to check the gap between them instead of this to check for custom dates
-                        case 'last hour':
-                        lastTime = 'Last Hour';
-        				break;
-        				case 'last day':
-                        lastTime = moment(transactions[i].date).format('dddd');
-        				break;
-        				case 'last week':
-                        lastTime = moment(transactions[i].date).format('dddd');
-        				break;
-        				case 'all time':
+                    if (moment(currentChart.timePeriod[0]).add(1, 'year').isisSameOrAfter(currentChart.timePeriod[1]))
+                    {
                         lastTime = moment(transactions[i].date).format('YYYY');
-        				break;
-        				default:
+                    }
+                    else if (moment(currentChart.timePeriod[0]).add(1, 'months').isisSameOrAfter(currentChart.timePeriod[1]))
+                    {
                         lastTime = moment(transactions[i].date).format('MMMM');
-        				break;
-                    }*/
+                    }
+                    else if (moment(currentChart.timePeriod[0]).add(1, 'days').isisSameOrAfter(currentChart.timePeriod[1]))
+                    {
+                        lastTime = moment(transactions[i].date).format('dddd');
+                    }
+                    else if (moment(currentChart.timePeriod[0]).add(1, 'hour').isisSameOrAfter(currentChart.timePeriod[1]))
+                    {
+                        lastTime = 'Last Hour';
+                    }
                     metricCalculation[lastTime] = sum;
                 }
             }
