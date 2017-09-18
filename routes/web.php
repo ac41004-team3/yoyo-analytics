@@ -13,21 +13,21 @@
 
 Auth::routes();
 
-
-Route::post('/updateUser', 'UserController@update')->name('updateUser');
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::group(['as' => 'admin.', 'prefix' => 'admin'], function() {
-        Route::get('/', 'AdminController@index')->name('index');
+    Route::group([
+        'as' => 'admin.',
+        'prefix' => 'admin',
+        'middleware' => ['role:admin'],
+    ], function () {
+        Route::resource('/users', 'UserController');
     });
 
-    Route::group(['as' => 'import.', 'prefix' => 'import'], function() {
+    Route::group(['as' => 'import.', 'prefix' => 'import'], function () {
         Route::get('/', 'ImportController@index')->name('index');
         Route::post('/', 'ImportController@store')->name('store');
     });
-
 
     Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
     Route::get('/browse', 'BrowseController@index')->name('browse.index');
