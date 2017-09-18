@@ -79,7 +79,7 @@
     </style>
 </head>
 <body>
-<div class="container">>
+<div class="container">
 <div class="title m-b-md flex-center">
     Admin
 </div>
@@ -112,12 +112,18 @@
 
               @if ( $user->is_active ===1)
 
-               <td>Yes</td>
-                   <td ><button id="deactivate" value={{ $user->id }}>Deactivate User</button> </td>
-
+               <td style="background-color: greenyellow">Yes</td>
+                   <form method="POST" action = "{{ route('deactivate' ) }}">
+                       <td ><button name="deactivate" id="deactivate" value={{ $user->id }}>Deactivate User</button> </td>
+                       {{ csrf_field() }}
+                   </form>
                @else
                    <td style="background-color: darkorange">No</td>
-                   <td ><button id="deactivate" value={{ $user->id }}>Activate User</button> </td>
+                <form method="POST" action = "{{ route('activate' ) }}">
+                   <td ><button type ="submit" name="activate" id="activate" value="{{ $user->id }}">Activate User</button> </td>
+                    {{ csrf_field() }}
+
+                </form>
                @endif
 
 
