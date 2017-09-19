@@ -29,7 +29,7 @@ class PermissionSeeder extends Seeder
         ];
 
         // TODO: Set in .env
-        $admin = User::create([
+        $admin = User::updateOrCreate(['id' => 1], [
             'name' => 'Admin',
             'email' => 'admin@dusa.co.uk',
             'password' => bcrypt('password'),
