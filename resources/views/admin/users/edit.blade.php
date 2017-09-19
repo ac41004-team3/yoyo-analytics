@@ -25,13 +25,22 @@
                         </div>
                         <div class="form-group ">
                             <label class="control-label " for="role">
-                                Select a Choice
+                                Select a Role
                             </label>
                             <select class="select form-control" id="role" name="role"
                                     value="{{ $user->roles()->first()->id }}">
                                 @foreach(\Spatie\Permission\Models\Role::all() as $role)
                                     <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="is_active">
+                                Enabled
+                            </label>
+                            <select class="select form-control" id="is_active" name="is_active">
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
                             </select>
                         </div>
                         <div class="form-group">

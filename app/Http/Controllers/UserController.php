@@ -61,7 +61,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $role = Role::findOrFail($request->input('role'));
-        $user->update(['name' => $request->input('name'), 'email' => $request->input('email')]);
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'is_active' => $request->input('is_active')
+        ]);
         $user->syncRoles($role);
         return redirect()->route('admin.users.index');
     }

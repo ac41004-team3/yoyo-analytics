@@ -25,7 +25,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ ucfirst($user->getRoleNames()->first()) }}</td>
                                     @if ($user->is_active)
-                                        <td><i class="fa fa-cross" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-times" aria-hidden="true"></i></td>
                                     @else
                                         <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                     @endif
