@@ -29,8 +29,8 @@
                             </label>
                             <select class="select form-control" id="role" name="role"
                                     value="{{ $user->roles()->first()->id }}">
-                                @foreach(\Spatie\Permission\Models\Role::all()->reverse() as $role)
-                                    <option value="{{ $role->id }}" {{ $user->roles()->first()->id = $role->id ? 'selected' : '' }}>{{ ucfirst($role->name) }}</option>
+                                @foreach(\Spatie\Permission\Models\Role::all() as $role)
+                                    <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                                 @endforeach
                             </select>
                         </div>
