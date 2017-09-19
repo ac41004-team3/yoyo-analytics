@@ -75,7 +75,7 @@
         
         function changeChartType(chartType) {
             currentChart.data = chartType;
-            calculateData(242);
+            buildChart();
         }
         
         function addOutlet(outletID) {
@@ -98,9 +98,15 @@
             var labelSetup = [];
             console.log(currentChart.outlets);
             for (i in currentChart.outlets) {
-				calculations.push(calculateMetric(currentChart.outlets[i]));
+				calculations.push(calculateData(currentChart.outlets[i]));
 			}
-			if (calculations !== null) {
+			for (j in calculations) {//iterate over both and compare for missing days, then insert zero?
+				//console.log(calculations[j]);
+				for (var key in calculations[j]) {
+					if (calculations[j].hasOwnProperty(key)) {
+						console.log('KEY ' + key);
+					}
+				}
 			}
             /*var myChart = new Chart(ctx, { 
             type: 'bar',
@@ -109,7 +115,6 @@
 				}
             
             }*/
-            console.log(calculations);
 		}
 		
 		function calculateData(currentOutletID) {
