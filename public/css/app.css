@@ -5761,6 +5761,7 @@ tbody.collapse.in {
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #777;
     color: #f5f5f5;
   }
 
@@ -8525,4 +8526,3 @@ button.close {
     color: #777777 !important;
   }
 }
-
