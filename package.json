@@ -17,14 +17,16 @@
         "jquery": "^3.1.1",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
-        "vue": "^2.4.2"
+        "vue": "^2.4.4"
     },
     "dependencies": {
         "babel-cli": "^6.26.0",
+        "bootstrap": "^3.3.7",
         "font-awesome": "^4.7.0",
-        "npm": "^5.4.1",
+        "npm": "^5.4.2",
+        "sweetalert2": "^6.9.0",
         "vue-cli": "^2.8.2",
         "vue-clip": "^1.0.0",
-        "vue-template-compiler": "^2.4.3"
+        "vue-template-compiler": "^2.4.4"
     }
 }

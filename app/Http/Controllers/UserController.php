@@ -1,64 +1,89 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Brodie
- * Date: 14/09/2017
- * Time: 12:01
- */
 
 namespace App\Http\Controllers;
 
-
 use App\User;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-
-    public function getData()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-
-
-        $users = User::all();
-        return view('admin')->with(compact('users'));
+        return view('admin.users.index')->with('users', User::all());
     }
 
-    public function activateUser(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $id = $request->input('activate');
-        $user= User::find($id);
-
-        $user->is_active = 1;
-        $user->save();
-
-        return $this->getData();
+        return User::create($request->all());
     }
 
-    public function update(Request $request)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
-        $id = $request->input('userid');
-        $is_active = $request->input('is_active');
-       // dd($is_active);
-
-        $user= User::find($id);
-        if($is_active ==="on") {
-            $user->is_active = 1;
-        }
-        else
-        {
-        $user->is_active = 0;
-        }
-        $user->save();
-
-        return $this->getData();
+        //
     }
 
-
-    public function delete()
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
     {
-
+        return view('admin.users.edit')->with('user', $user);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'is_active' => 'integer',
+        ]);
 
+        $role = Role::findOrFail($request->input('role'));
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'is_active' => $request->input('is_active')
+        ]);
+        $user->syncRoles($role);
+        return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        //
+    }
 }

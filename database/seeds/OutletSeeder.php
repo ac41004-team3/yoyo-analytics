@@ -3,7 +3,7 @@
 use App\Outlet;
 use Illuminate\Database\Seeder;
 
-class OutletTableSeeder extends Seeder
+class OutletSeeder extends Seeder
 {
     /**
      * Run the database seeds.
