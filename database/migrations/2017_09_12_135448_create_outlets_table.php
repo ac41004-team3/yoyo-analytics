@@ -43,7 +43,7 @@ class CreateOutletsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('outlets');
         Schema::dropIfExists('outlet_user');
+        Schema::dropIfExists('outlets');
     }
 }
