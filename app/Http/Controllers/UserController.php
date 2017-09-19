@@ -60,6 +60,12 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'is_active' => 'integer',
+        ]);
+
         $role = Role::findOrFail($request->input('role'));
         $user->update([
             'name' => $request->input('name'),
