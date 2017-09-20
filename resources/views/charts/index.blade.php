@@ -4,6 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css"/>
     <title></title>
 </head>
@@ -34,101 +35,104 @@
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
-		
+
 		for (i in transactions)
 		{
 			document.write(transactions[i].date + "<br />");
 		}
-		
+
         var currentChart = { //Object which holds data on current chart, modify using setter methods
-            type: null, 
+            type: null,
             metric: null,
             timePeriod: [], //Lower Bound, Now
             periodDefinition: null,
             outlets: []
         };
-        
+
         var barChartData = {//each dataset will be a different outlet essentially
 			labels: [],
 			datasets: [{
 			}]
 		};
-		
-		var startDatePicker = new Pikaday({ 
+
+		var startDatePicker = new Pikaday({
 			field: document.getElementById('StartDate'),
 			maxDate: moment().toDate(),
 			onSelect: function() {
 				currentChart.timePeriod[0] = this.getMoment();
 			}
 		});
-		
-		var endDatePicker = new Pikaday({ 
+
+		var endDatePicker = new Pikaday({
 			field: document.getElementById('EndDate'),
 			maxDate: moment().toDate(),
 			onSelect: function() {
 				currentChart.timePeriod[1] = this.getMoment();
 			}
 		});
-		
+
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart;
-        
+
         function changeChartType(chartType) {
             currentChart.data = chartType;
             buildChart();
         }
-        
+
         function addOutlet(outletID) {
-			console.log(outletID);
 			currentChart.outlets.indexOf(outletID) === -1 ? currentChart.outlets.push(outletID) : currentChart.outlets.splice(currentChart.outlets.indexOf(outletID), 1);
         }
-        
-		function buildLabel() {
-			barChartData.labels = [];
-			
-		}
-		
+
 		function setMetric(metric) {
 			currentChart.metric = metric;
 		}
+
 		function buildChart() {
             //myChart.destroy();
-            console.log(currentChart.metric);
             var calculations = [];
             var labelSetup = [];
-            console.log(currentChart.outlets);
             for (i in currentChart.outlets) {
 				calculations.push(calculateData(currentChart.outlets[i]));
 			}
-			for (j in calculations) {//iterate over both and compare for missing days, then insert zero?
-				//console.log(calculations[j]);
+            var lowerBound = moment(currentChart.timePeriod[0]);
+            while (lowerBound.isSameOrBefore(currentChart.timePeriod[1])) {
+                labelSetup.push(lowerBound.format('YYYY-MM-DD'));
+                lowerBound = lowerBound.add(1, 'days');
+            }
+			for (j in calculations) {
 				for (var key in calculations[j]) {
 					if (calculations[j].hasOwnProperty(key)) {
-						console.log('KEY ' + key);
+						//console.log('KEY ' + key);
 					}
 				}
 			}
-            /*var myChart = new Chart(ctx, { 
+            //console.log(labelSetup);
+            /*var myChart = new Chart(ctx, {
             type: 'bar',
 				data: {
-					
+
 				}
-            
+
             }*/
 		}
-		
+
 		function calculateData(currentOutletID) {
 			var metricCalculation = {};
 			var transactionList = [];
 			var lastTime;
 			var sum = 0;
 			for (i in transactions) {
-				if (moment(transactions[i].date).isAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isBefore(currentChart.timePeriod[1])) {
+				if (moment(transactions[i].date).isSameOrAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isSameOrBefore(currentChart.timePeriod[1])) {
 					if (transactions[i].outlet_id === currentOutletID) {
 						transactionList.push(transactions[i]);
 					}
 				}
 			}
+            var lower = moment(currentChart.timePeriod[0]);
+            while (lower.isSameOrBefore(currentChart.timePeriod[1])) {
+                metricCalculation[lower.format("YYYY-MM-DD")] = 0;
+                lower = lower.add(1, 'days');
+            }
 			var initDate = false;
 			for (j in transactionList) {
 				if (initDate === false) {
@@ -143,10 +147,10 @@
 				lastTime = moment(transactionList[j].date).format("YYYY-MM-DD");
 			}
 			metricCalculation[lastTime] = sum;
-			console.log(metricCalculation);
+            console.log(metricCalculation);
             return metricCalculation;
 		}
-		
+
 		//SOURCE: https://stackoverflow.com/questions/1484506/random-color-generator
         function getRandomColor() {
             var letters = '0123456789ABCDEF';
