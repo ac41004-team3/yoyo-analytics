@@ -51,8 +51,7 @@
 
         var barChartData = {//each dataset will be a different outlet essentially
 			labels: [],
-			datasets: [{
-			}]
+			datasets: []
 		};
 
 		var startDatePicker = new Pikaday({
@@ -87,6 +86,7 @@
 			currentChart.metric = metric;
 		}
 
+        //narrow function in the future?
 		function buildChart() {
             //myChart.destroy();
             var calculations = [];
@@ -99,21 +99,25 @@
                 labelSetup.push(lowerBound.format('YYYY-MM-DD'));
                 lowerBound = lowerBound.add(1, 'days');
             }
-			for (j in calculations) {
+			for (j in calculations) { //sep method
+                var dataList = {
+                    label: null,
+                    backgroundColor: getRandomColor(),
+                    data: []
+                };
+                dataList.label = currentChart.outlets[j];
 				for (var key in calculations[j]) {
 					if (calculations[j].hasOwnProperty(key)) {
-						//console.log('KEY ' + key);
+						barChartData.labels.push(key);
+                        dataList.data.push(calculations[j][key]);
 					}
 				}
+                barChartData.datasets.push(dataList);
 			}
-            //console.log(labelSetup);
-            /*var myChart = new Chart(ctx, {
+            var myChart = new Chart(ctx, {
             type: 'bar',
-				data: {
-
-				}
-
-            }*/
+				data: barChartData
+            });
 		}
 
 		function calculateData(currentOutletID) {
