@@ -29,7 +29,7 @@ class ProcessUploadedFile
      */
     public function handle(FileUploaded $event)
     {
-        Excel::filter('chunk')->load(storage_path('app/' . $event->path))->chunk(200, function ($results) {
+        Excel::filter('chunk')->load(storage_path('app/'.$event->path))->chunk(200, function($results) {
             foreach ($results as $row) {
                 // associative array to indexed
                 $data = [];

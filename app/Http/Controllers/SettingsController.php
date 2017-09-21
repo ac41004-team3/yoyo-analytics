@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        /**
+         * Show the application dashboard.
+         *
+         * @return \Illuminate\Http\Response
+         */
     public function index()
     {
         return view('settings');
