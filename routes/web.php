@@ -15,11 +15,6 @@ use App\Import;
 
 Auth::routes();
 
-Route::any('/test', function () {
-    $import = Import::find(1);
-    dd($import->user()->get());
-    dd(Auth::user()->imports()->get());
-});
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
