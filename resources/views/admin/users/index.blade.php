@@ -36,7 +36,7 @@
                                 Select a Role
                             </label>
                             <select class="select form-control" id="role" name="role">
-                                @foreach(\Spatie\Permission\Models\Role::all()->reverse() as $role)
+                                @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                                 @endforeach
                             </select>
@@ -56,7 +56,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Users</h3>
+                    <h3 class="panel-title">Manage Users</h3>
                 </div>
                 <div class="panel-body">
                     <table class="center table table-striped">

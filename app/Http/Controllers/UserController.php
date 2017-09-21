@@ -23,6 +23,7 @@ class UserController extends Controller
 
         if ($user->hasPermissionTo('manage-assigned-users')) {
             $users = User::all();
+            $roles = Role::all()->reverse();
         } elseif ($user->hasPermissionTo('manage-users')) {
             // get non-administrative users associated with the users outlet
             $users = $user->outlets()->get()->flatMap(function ($outlet) {
@@ -30,11 +31,16 @@ class UserController extends Controller
             })->reject(function ($user) {
                 return $user->hasRole('admin');
             });
+            $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
+              return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
+            });
         } else {
             // not allowed
         }
 
-        return view('admin.users.index')->with('users', $users);
+        return view('admin.users.index')
+            ->with('users', $users)
+            ->with('roles', $roles);
     }
 
     /**
