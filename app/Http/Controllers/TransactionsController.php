@@ -21,6 +21,11 @@ class TransactionsController extends Controller
 		return $transaction;
 	}
 
+	public function getOutletTotals($outlet)
+    {
+        dd($outlet);
+    }
+
     public function getOutletTakings()
     {
 
