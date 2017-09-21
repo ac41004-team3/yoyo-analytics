@@ -13,18 +13,18 @@
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::group([
         'as' => 'admin.',
         'prefix' => 'admin',
         'middleware' => ['role:admin'],
-    ], function () {
+    ], function() {
         Route::resource('/users', 'UserController');
     });
 
-    Route::group(['as' => 'import.', 'prefix' => 'import'], function () {
+    Route::group(['as' => 'import.', 'prefix' => 'import'], function() {
         Route::get('/', 'ImportController@index')->name('index');
         Route::post('/', 'ImportController@store')->name('store');
     });

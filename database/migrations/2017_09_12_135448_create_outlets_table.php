@@ -13,13 +13,13 @@ class CreateOutletsTable extends Migration
      */
     public function up()
     {
-        Schema::create('outlets', function (Blueprint $table) {
+        Schema::create('outlets', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name')->unique();
             $table->timestamps();
         });
 
-        Schema::create('outlet_user', function (Blueprint $table) {
+        Schema::create('outlet_user', function(Blueprint $table) {
             $table->integer('outlet_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
