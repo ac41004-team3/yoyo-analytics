@@ -1,3 +1,4 @@
+/* analytic page links */
 .selectionBox {
     font-size: 1.1em;
     font-weight: bold;
@@ -20,4 +21,29 @@
 
 h1 {
       display: inline-block;
+}
+
+/* flashing links */
+.linkHover a:hover {
+    opacity: 1;
+    -webkit-animation: flash 1.5s;
+    animation: flash 1.5s;
+}
+
+@-webkit-keyframes flash {
+    0% {
+    opacity: .4;
+    }
+    100% {
+    opacity: 1;
+    }
+}
+
+@keyframes flash {
+    0% {
+    opacity: .4;
+    }
+    100% {
+    opacity: 1;
+    }
 }
