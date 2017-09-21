@@ -54,6 +54,7 @@ class ProcessUploadedFile
                     }
                 });
         } catch (Exception $e) {
+            // TODO: Implement failure detection/logging
             $status = 'error';
         } finally {
             $import->status = $status;
