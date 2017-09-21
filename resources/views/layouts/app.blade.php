@@ -16,34 +16,30 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        
-        <nav class="navbar navbar-default navbar-static-top">       
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-                
-                
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
+<div id="app">
+  <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!-- collapsed hamburger -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <ul class="nav navbar-nav linkHover">
+                <li><a href="{{route('home')}}"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
+                <li><a href="{{route('analytics.index')}}"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
+                <li><a href="{{route('browse.index')}}"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
+                <li><a href="{{route('import.index')}}"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
+            </ul>
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right linkHover">
+            <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
@@ -72,32 +68,16 @@
                                 </ul>
                             </li>
                         @endguest
-                    </ul>
-                    
-                    
-                </div>
-            </div>
+            </ul>                            
             
-            <!--side nav bar -->
-            <div class="col-sm-2">
-                <nav class="navbar navbar-default navbar-fixed-side">
-                    <ul class="">
-                        <li><a href="{{route('home')}}"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
-                        <li><a href="{{route('analytics.index')}}"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
-                        <li><a href="{{route('browse.index')}}"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
-                        <li><a href="{{route('import.index')}}"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
-                    </ul>
-                    
-                    
-                </nav>
+                </div>   
             </div>
-            
-        </nav>
-        
+        </div>
+                @yield('content')
+</div>
 
-        @yield('content')
-    </div>
 
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
