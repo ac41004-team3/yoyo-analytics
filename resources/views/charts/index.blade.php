@@ -38,7 +38,7 @@
 
 		for (i in transactions)
 		{
-			document.write(transactions[i].date + "<br />");
+			//document.write(transactions[i].date + "<br />");
 		}
 
         var currentChart = { //Object which holds data on current chart, modify using setter methods
@@ -58,7 +58,7 @@
 			field: document.getElementById('StartDate'),
 			maxDate: moment().toDate(),
 			onSelect: function() {
-				currentChart.timePeriod[0] = this.getMoment();
+				currentChart.timePeriod[0] = this.getMoment().add(1,'hours');
 			}
 		});
 
@@ -66,7 +66,7 @@
 			field: document.getElementById('EndDate'),
 			maxDate: moment().toDate(),
 			onSelect: function() {
-				currentChart.timePeriod[1] = this.getMoment();
+				currentChart.timePeriod[1] = this.getMoment().add(24, 'hours');
 			}
 		});
 
@@ -108,10 +108,16 @@
                 dataList.label = currentChart.outlets[j];
 				for (var key in calculations[j]) {
 					if (calculations[j].hasOwnProperty(key)) {
-						barChartData.labels.push(key);
+                        if (barChartData.labels.indexOf(key) === -1) {
+                            if (typeof key !== "undefined") {
+                                barChartData.labels.push(key);
+                            }
+                        }
+                        console.log(key + ' -> ' + calculations[j][key]);
                         dataList.data.push(calculations[j][key]);
 					}
 				}
+
                 barChartData.datasets.push(dataList);
 			}
             var myChart = new Chart(ctx, {
@@ -125,6 +131,8 @@
 			var transactionList = [];
 			var lastTime;
 			var sum = 0;
+            console.log(currentChart.timePeriod[0]);
+            console.log(currentChart.timePeriod[1]);
 			for (i in transactions) {
 				if (moment(transactions[i].date).isSameOrAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isSameOrBefore(currentChart.timePeriod[1])) {
 					if (transactions[i].outlet_id === currentOutletID) {
@@ -150,8 +158,11 @@
 				sum += transactionList[j].total;
 				lastTime = moment(transactionList[j].date).format("YYYY-MM-DD");
 			}
-			metricCalculation[lastTime] = sum;
+            if (sum > 0) {
+			     metricCalculation[lastTime] = sum;
+            }
             console.log(metricCalculation);
+            //Object.keys(metricCalculation).forEach(key => metricCalculation[key] === undefined && delete metricCalculation[key]);
             return metricCalculation;
 		}
 
