@@ -1,5 +1,6 @@
 <?php
 
+use App\Outlet;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -14,6 +15,7 @@ class UserSeeder extends Seeder
     {
         factory(App\User::class, 500)->create()->each(function ($user) {
             $user->assignRole(Role::inRandomOrder()->first()->name);
+            $user->outlets()->attach(array_random(Outlet::all()->pluck('id')->toArray(), random_int(0, 4)));
             //TODO:: associate user with outlet(s)
         });
     }

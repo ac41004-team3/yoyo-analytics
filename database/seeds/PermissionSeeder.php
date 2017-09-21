@@ -1,5 +1,6 @@
 <?php
 
+use App\Outlet;
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -15,6 +16,11 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $roles = [
+            'super admin' => [
+                'manage-users',
+                'manage-data',
+                'manage-branches',
+            ],
             'admin' => [
                 'manage-users',
                 'manage-data',
@@ -22,6 +28,7 @@ class PermissionSeeder extends Seeder
             ],
             'manager' => [
                 'manage-assigned-branches',
+                'manage-assigned-users',
             ],
             'user' => [
                 'view-assigned-branches',
@@ -29,9 +36,30 @@ class PermissionSeeder extends Seeder
         ];
 
         // TODO: Set in .env
-        $admin = User::updateOrCreate(['id' => 1], [
+        $super_admin = User::updateOrCreate(['id' => 1], [
+            'name' => 'Super Admin',
+            'email' => 'superadmin@dusa.co.uk',
+            'password' => bcrypt('password'),
+        ]);
+
+
+        $admin = User::updateOrCreate(['id' => 2], [
             'name' => 'Admin',
             'email' => 'admin@dusa.co.uk',
+            'password' => bcrypt('password'),
+        ]);
+
+
+        $manager = User::updateOrCreate(['id' => 3], [
+            'name' => 'Manager',
+            'email' => 'manager@dusa.co.uk',
+            'password' => bcrypt('password'),
+        ]);
+
+
+        $user = User::updateOrCreate(['id' => 4], [
+            'name' => 'User',
+            'email' => 'user@dusa.co.uk',
             'password' => bcrypt('password'),
         ]);
 
@@ -43,6 +71,14 @@ class PermissionSeeder extends Seeder
             }
         }
 
+        $super_admin->assignRole('super admin');
         $admin->assignRole('admin');
+        $manager->assignRole('manager');
+        $user->assignRole('user');
+
+        $super_admin->outlets()->sync(Outlet::all()->pluck('id')->toArray());
+        $admin->outlets()->sync(array_random(Outlet::all()->pluck('id')->toArray()));
+        $manager->outlets()->sync(array_random(Outlet::all()->pluck('id')->toArray(), random_int(1, 2)));
+        $user->outlets()->sync(array_random(Outlet::all()->pluck('id')->toArray(), 1));
     }
 }
