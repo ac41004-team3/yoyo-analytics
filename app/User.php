@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Outlet');
     }
+
+    public function imports()
+    {
+        return $this->hasMany('App\Import');
+    }
 }

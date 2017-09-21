@@ -20,23 +20,25 @@
                         <table class="center table table-striped">
                             <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Status</th>
+                                <th>Import</th>
                                 <th>Uploader</th>
+                                <th>When</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach(\App\Import::all()->reverse() as $import)
                                 <tr>
-                                    <td><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ ucwords($user->getRoleNames()->first()) }}</td>
-                                    @if ($user->is_active)
-                                        <td><i class="fa fa-times" aria-hidden="true"></i></td>
-                                    @else
+                                    <td>#{{ $import->id }}</td>
+                                    <td>{{ $import->user()->first()->name }}</td>
+                                    <td title="{{ $import->created_at }}">{{ $import->created_at->diffForHumans() }}</td>
+                                    @if($import->status)
                                         <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                    @else
+                                        <td><i class="fa fa-times" aria-hidden="true"></i></td>
                                     @endif
+                                    <td><revert-import id="{{ $import->id }}" action="{{ route('admin.import.revert') }}"></revert-import></td>
                                 </tr>
                             @endforeach
                             </tbody>

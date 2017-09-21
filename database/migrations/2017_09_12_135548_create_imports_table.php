@@ -14,7 +14,7 @@ class CreateImportsTable extends Migration
     public function up()
     {
         Schema::create('imports', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('status');
             $table->timestamps();
