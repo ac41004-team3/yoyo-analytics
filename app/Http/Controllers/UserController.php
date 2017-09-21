@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    use SendsPasswordResetEmails;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('users', User::all());
+        $user = Auth::user();
+
+        if ($user->hasPermissionTo('manage-assigned-users')) {
+            $users = User::all();
+        } elseif ($user->hasPermissionTo('manage-users')) {
+            // get non-administrative users associated with the users outlet
+            $users = $user->outlets()->get()->flatMap(function ($outlet) {
+                return $outlet->users()->get();
+            })->reject(function ($user) {
+                return $user->hasRole('admin');
+            });
+        } else {
+            // not allowed
+        }
+
+        return view('admin.users.index')->with('users', $users);
     }
 
     /**
@@ -26,7 +45,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return User::create($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'is_active' => 'integer',
+        ]);
+
+        $role = Role::findOrFail($request->input('role'));
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt(str_random(32)),
+            'is_active' => 1,
+        ])->syncRoles($role);
+
+        $this->sendResetLinkEmail($request);
+        $request->session()->flash('status', 'User added successfully!');
+        return redirect()->route('admin.users.index');
     }
 
     /**

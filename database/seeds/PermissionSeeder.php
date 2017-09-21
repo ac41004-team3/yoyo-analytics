@@ -22,7 +22,8 @@ class PermissionSeeder extends Seeder
             ],
             'manager' => [
                 'manage-assigned-branches',
-            ],
+                'manage-assigned-users',
+        ],
             'user' => [
                 'view-assigned-branches',
             ],
