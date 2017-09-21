@@ -73,7 +73,7 @@
                             <tr>
                                 <td><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ ucfirst($user->getRoleNames()->first()) }}</td>
+                                <td>{{ ucwords($user->getRoleNames()->first()) }}</td>
                                 @if ($user->is_active)
                                     <td><i class="fa fa-times" aria-hidden="true"></i></td>
                                 @else
