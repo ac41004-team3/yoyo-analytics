@@ -11,18 +11,20 @@
 <body>
     <button id="Line" onclick="changeChartType('line')">Line</button>
     <button id="Bar" onclick="changeChartType('bar')">Bar</button>
-    <button id="Pie" onclick="changeChartType('pie')">Pie</button>
-    <button id="Spatial" onclick="changeChartType('radar')">Spatial</button>
+    <button id="Spatial" onclick="changeChartType('radar')">Radar</button>
     <br>
     <br>
     <button id="" onclick="setMetric(1)">Transaction Total</button>
     <button id="" onclick="setMetric(2)">Discount Total</button>
     <button id="" onclick="setMetric(3)">Spent Total</button>
     <button id="" onclick="setMetric(4)">Transaction Count</button>
+    <button id="" onclick="setMetric(5)">Redemptions</button>
+    <button id="" onclick="setMetric(6)">Payments</button>
     <br>
     <br>
     <input type="text" id="StartDate">
     <input type="text" id="EndDate">
+    <button id="" onclick="buildChart()">Build Chart</button>
     <br>
     <br>
     @foreach ($outlets as $outlet)
@@ -71,11 +73,13 @@
 		});
 
         var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart;
+        var myChart = new Chart(ctx, {
+        type: 'line',
+            data: barChartData
+        });
 
         function changeChartType(chartType) {
-            currentChart.data = chartType;
-            buildChart();
+            currentChart.type = chartType;
         }
 
         function addOutlet(outletID) {
@@ -88,7 +92,10 @@
 
         //narrow function in the future?
 		function buildChart() {
-            //myChart.destroy();
+            barChartData = {
+    			labels: [],
+    			datasets: []
+    		};
             var calculations = [];
             var labelSetup = [];
             for (i in currentChart.outlets) {
@@ -100,11 +107,28 @@
                 lowerBound = lowerBound.add(1, 'days');
             }
 			for (j in calculations) { //sep method
-                var dataList = {
-                    label: null,
-                    backgroundColor: getRandomColor(),
-                    data: []
-                };
+                switch (currentChart.type) {
+                    case 'bar':
+                    case 'doughnut':
+                    var dataList = {
+                        label: null,
+                        backgroundColor: getRandomColor(),
+                        borderColor: '#000000',
+                        data: []
+                    };
+                    break;
+                    case 'radar':
+                    case 'line':
+                    var dataList = {
+                        label: null,
+                        borderColor: getRandomColor(),
+                        data: []
+                    };
+                    break;
+                    default:
+                    console.log("something went wrong");
+                    break;
+                }
                 dataList.label = currentChart.outlets[j];
 				for (var key in calculations[j]) {
 					if (calculations[j].hasOwnProperty(key)) {
@@ -120,9 +144,14 @@
 
                 barChartData.datasets.push(dataList);
 			}
-            var myChart = new Chart(ctx, {
-            type: 'bar',
-				data: barChartData
+            myChart.destroy();
+
+            myChart = new Chart(ctx, {
+            type: currentChart.type,
+				data: barChartData,
+                options: {
+                    responsive: true
+                }
             });
 		}
 
@@ -131,8 +160,6 @@
 			var transactionList = [];
 			var lastTime;
 			var sum = 0;
-            console.log(currentChart.timePeriod[0]);
-            console.log(currentChart.timePeriod[1]);
 			for (i in transactions) {
 				if (moment(transactions[i].date).isSameOrAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isSameOrBefore(currentChart.timePeriod[1])) {
 					if (transactions[i].outlet_id === currentOutletID) {
@@ -155,14 +182,39 @@
 					metricCalculation[lastTime] = sum;
 					sum = 0;
 				}
-				sum += transactionList[j].total;
+                //sum += transactionList[j].total;
+                switch (currentChart.metric) {
+				     case 1:
+                     sum += transactionList[j].total;
+                     break;
+                     case 2:
+                     sum += transactionList[j].discount;
+                     break;
+                     case 3:
+                     sum += transactionList[j].spent;
+                     break;
+                     case 4:
+                     sum += 1;
+                     break;
+                     case 5:
+                     if (transactionList[j].type === "Redemption") {
+                         sum += 1;
+                     }
+                     break;
+                     case 6:
+                     if (transactionList[j].type === "Payment") {
+                         sum += 1;
+                     }
+                     break;
+                     default:
+                     break;
+                }
 				lastTime = moment(transactionList[j].date).format("YYYY-MM-DD");
 			}
             if (sum > 0) {
 			     metricCalculation[lastTime] = sum;
             }
             console.log(metricCalculation);
-            //Object.keys(metricCalculation).forEach(key => metricCalculation[key] === undefined && delete metricCalculation[key]);
             return metricCalculation;
 		}
 
