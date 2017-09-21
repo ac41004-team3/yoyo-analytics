@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/', 'ImportController@store')->name('store');
     });
 
+    Route::view('/takings', 'takings');
+
     Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
     Route::get('/browse', 'BrowseController@index')->name('browse.index');
     Route::get('/settings', 'SettingsController@index')->name('settings.index');

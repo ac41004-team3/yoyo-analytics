@@ -20,4 +20,10 @@ class TransactionsController extends Controller
 		$transaction = Transaction::find($id);
 		return $transaction;
 	}
+
+    public function getOutletTakings()
+    {
+
+    }
+
 }
