@@ -12,13 +12,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar-fixed-side.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+        
+        <nav class="navbar navbar-default navbar-static-top">       
+            <div class="container-fluid">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -32,12 +34,12 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
+                
+                
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                    
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -56,20 +58,44 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                                 <span class="glyphicon glyphicon-log-out"></span>
+                                             Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                    <a href="{{route('settings')}}"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                                    </li>
                                 </ul>
                             </li>
                         @endguest
                     </ul>
+                    
+                    
                 </div>
             </div>
+            
+            <!--side nav bar -->
+            <div class="col-sm-2">
+                <nav class="navbar navbar-default navbar-fixed-side">
+                    
+                    
+                    <ul class="">
+                        <li><a href="{{route('home')}}"><span class="glyphicon glyphicon-dashboard">&nbsp;</span>Dashboard</a></li>
+                        <li><a href="{{route('analytics')}}"><span class="glyphicon glyphicon-signal">&nbsp;</span>Analytics</a></li>
+                        <li><a href="{{route('browse')}}"><span class="glyphicon glyphicon-folder-open">&nbsp;</span>Browse</a></li>
+                        <li><a href="{{route('upload')}}"><span class="glyphicon glyphicon-upload">&nbsp;</span>Upload</a></li>
+                    </ul>
+                    
+                    
+                </nav>
+            </div>
+            
         </nav>
+        
 
         @yield('content')
     </div>

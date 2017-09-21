@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('outlet_id')->unsigned();
             $table->string('customer_id');
 
+            $table->dateTime('date');
             $table->string('type');
             $table->integer('spent');
             $table->integer('discount');

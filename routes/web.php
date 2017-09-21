@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/welcome', function () {
@@ -34,4 +34,23 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::any('/admin', 'UserController@getData')->name('admin');
+//Route::post('/activate/{id}', 'UserController@activateUser')->name('activate');
+//Route::post('/activate', 'UserController@activateUser')->name('activate');
+//Route::post('/deactivate', 'UserController@deactivateUser')->name('deactivate');
+Route::post('/updateUser', 'UserController@update')->name('updateUser');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/import', 'ImportController@index')->name('import');
+    Route::post('/import', 'ImportController@store');
+});
+
+//=======
+Route::get('/analytics', 'AnalyticsController@index')->name('analytics');
+Route::get('/browse', 'BrowseController@index')->name('browse');
+Route::get('/upload', 'UploadController@index')->name('upload');
+Route::get('/settings', 'SettingsController@index')->name('settings');
+//>>>>>>> dashboard

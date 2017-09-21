@@ -10,36 +10,50 @@ namespace App\Http\Controllers;
 
 
 use App\User;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
 
     public function getData()
     {
-//        $data = User::all()
 
-//$users = User::select('id','name','email','is_admin','is_active')->get();
-//        $users = User::all();
-//        return $users;
-//        return Response::json($users);
 
-//        return Response(array(
-//
-//        'Result' => 'OK',
-//            'TotalRecordCount' => $users->count(),
-//            'Records' => $users->get()->toArray()
-//        ));
-
-        $users = \App\User::all();
+        $users = User::all();
         return view('admin')->with(compact('users'));
     }
 
-    public function update()
+    public function activateUser(Request $request)
     {
+        $id = $request->input('activate');
+        $user= User::find($id);
 
+        $user->is_active = 1;
+        $user->save();
+
+        return $this->getData();
     }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('userid');
+        $is_active = $request->input('is_active');
+       // dd($is_active);
+
+        $user= User::find($id);
+        if($is_active ==="on") {
+            $user->is_active = 1;
+        }
+        else
+        {
+        $user->is_active = 0;
+        }
+        $user->save();
+
+        return $this->getData();
+    }
+
 
     public function delete()
     {
