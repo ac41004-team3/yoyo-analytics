@@ -22,6 +22,11 @@
     <button id="" onclick="setMetric(6)">Payments</button>
     <br>
     <br>
+    <button id="" onclick="setTribe(3)">Whale</button> <!--big spends > 50?-->
+    <button id="" onclick="setTribe(2)">Early Bird</button>
+    <button id="" onclick="setTribe(1)">Night Owl</button>
+    <br>
+    <br>
     <input type="text" id="StartDate">
     <input type="text" id="EndDate">
     <button id="" onclick="buildChart()">Build Chart</button>
@@ -30,8 +35,8 @@
     @foreach ($outlets as $outlet)
 		<button id="{{ $outlet->id }}" onclick="addOutlet({{ $outlet->id }})">{{ $outlet->name }}</button>
     @endforeach
-    <div style="width:75%; height:50%;">
-        <canvas id="myChart" width="100" height="100"></canvas>
+    <div style="width:75%; max-height:100px;">
+        <canvas id="myChart" width="100" height="50"></canvas>
         <script>
 		//I will probably load in all data by default and simply trip the hidden:true|false
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
@@ -46,6 +51,7 @@
         var currentChart = { //Object which holds data on current chart, modify using setter methods
             type: null,
             metric: null,
+            tribe: 0,
             timePeriod: [], //Lower Bound, Now
             periodDefinition: null,
             outlets: []
@@ -75,7 +81,16 @@
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
         type: 'line',
-            data: barChartData
+            data: barChartData,
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+            }
         });
 
         function changeChartType(chartType) {
@@ -89,6 +104,15 @@
 		function setMetric(metric) {
 			currentChart.metric = metric;
 		}
+
+        function setTribe(tribe) {
+            if (currentChart.tribe === tribe) {
+                currentChart.tribe = 0;
+            }
+            else {
+                currentChart.tribe = tribe;
+            }
+        }
 
         //narrow function in the future?
 		function buildChart() {
@@ -129,7 +153,11 @@
                     console.log("something went wrong");
                     break;
                 }
-                dataList.label = currentChart.outlets[j];
+                for (k in outlets) {
+                    if (outlets[k].id === currentChart.outlets[j]) {
+                        dataList.label = outlets[k].name;
+                    }
+                }
 				for (var key in calculations[j]) {
 					if (calculations[j].hasOwnProperty(key)) {
                         if (barChartData.labels.indexOf(key) === -1) {
@@ -150,7 +178,14 @@
             type: currentChart.type,
 				data: barChartData,
                 options: {
-                    responsive: true
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
                 }
             });
 		}
@@ -163,7 +198,26 @@
 			for (i in transactions) {
 				if (moment(transactions[i].date).isSameOrAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isSameOrBefore(currentChart.timePeriod[1])) {
 					if (transactions[i].outlet_id === currentOutletID) {
-						transactionList.push(transactions[i]);
+                        console.log(currentChart.tribe);
+                        switch (currentChart.tribe) {
+                            case 1:
+                            if (minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T20:00:00.000'))) {
+                                transactionList.push(transactions[i]);
+                            }
+                            break;
+                            case 2:
+                            if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T09:00:00.000'))) {
+                                transactionList.push(transactions[i]);
+                            }
+                            break;
+                            case 3:
+                            if (transactions[i].total / 100 > 15) {
+                                transactionList.push(transactions[i]);
+                            }
+                            default:
+                            transactionList.push(transactions[i]);
+                            break;
+                        }
 					}
 				}
 			}
@@ -183,15 +237,16 @@
 					sum = 0;
 				}
                 //sum += transactionList[j].total;
+
                 switch (currentChart.metric) {
 				     case 1:
-                     sum += transactionList[j].total;
+                     sum += transactionList[j].total / 100;
                      break;
                      case 2:
-                     sum += transactionList[j].discount;
+                     sum += transactionList[j].discount / 100;
                      break;
                      case 3:
-                     sum += transactionList[j].spent;
+                     sum += transactionList[j].spent / 100;
                      break;
                      case 4:
                      sum += 1;
@@ -226,6 +281,9 @@
                 color += letters[Math.floor(Math.random() * 16)];
             }
             return color;
+        }
+        function minutesOfDay(m) {
+            return m.minutes() + m.hours() * 60;
         }
         </script>
     </div>
