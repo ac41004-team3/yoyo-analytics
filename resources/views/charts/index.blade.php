@@ -35,6 +35,14 @@
     @foreach ($outlets as $outlet)
 		<button id="{{ $outlet->id }}" onclick="addOutlet({{ $outlet->id }})">{{ $outlet->name }}</button>
     @endforeach
+    <br>
+    <br>
+    <select size="5" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
+        <option value="None">None</option>
+        @foreach ($customers as $customer)
+        <option value="{{ $customer->id }}">{{ $customer->id }}</option>
+        @endforeach
+    </select>
     <div style="width:75%; max-height:100px;">
         <canvas id="myChart" width="100" height="50"></canvas>
         <script>
@@ -51,6 +59,7 @@
         var currentChart = { //Object which holds data on current chart, modify using setter methods
             type: null,
             metric: null,
+            user: 'None',
             tribe: 0,
             timePeriod: [], //Lower Bound, Now
             periodDefinition: null,
@@ -113,6 +122,9 @@
                 currentChart.tribe = tribe;
             }
         }
+        function setUser(user) {
+            currentChart.user = user;
+        }
 
         //narrow function in the future?
 		function buildChart() {
@@ -165,7 +177,6 @@
                                 barChartData.labels.push(key);
                             }
                         }
-                        console.log(key + ' -> ' + calculations[j][key]);
                         dataList.data.push(calculations[j][key]);
 					}
 				}
@@ -173,7 +184,6 @@
                 barChartData.datasets.push(dataList);
 			}
             myChart.destroy();
-
             myChart = new Chart(ctx, {
             type: currentChart.type,
 				data: barChartData,
@@ -198,7 +208,6 @@
 			for (i in transactions) {
 				if (moment(transactions[i].date).isSameOrAfter(currentChart.timePeriod[0]) && moment(transactions[i].date).isSameOrBefore(currentChart.timePeriod[1])) {
 					if (transactions[i].outlet_id === currentOutletID) {
-                        console.log(currentChart.tribe);
                         switch (currentChart.tribe) {
                             case 1:
                             if (minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T20:00:00.000'))) {
@@ -228,6 +237,11 @@
             }
 			var initDate = false;
 			for (j in transactionList) {
+                if (currentChart.user !== 'None') {
+                    if (transactionList[j].customer_id !== currentChart.user) {
+                        continue;
+                    }
+                }
 				if (initDate === false) {
 					lastTime = moment(transactionList[j].date).format("YYYY-MM-DD");
 					initDate = true;
@@ -236,8 +250,6 @@
 					metricCalculation[lastTime] = sum;
 					sum = 0;
 				}
-                //sum += transactionList[j].total;
-
                 switch (currentChart.metric) {
 				     case 1:
                      sum += transactionList[j].total / 100;
@@ -269,7 +281,6 @@
             if (sum > 0) {
 			     metricCalculation[lastTime] = sum;
             }
-            console.log(metricCalculation);
             return metricCalculation;
 		}
 
