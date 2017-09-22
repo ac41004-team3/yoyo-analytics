@@ -41994,19 +41994,25 @@ module.exports = Vue$3;
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(8)(
-  /* script */
-  null,
-  /* template */
-  null,
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/home/thms/Dropbox/Projects/yoyo-analytics/resources/assets/js/components/Example.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 module.exports = Component.exports
@@ -42021,19 +42027,25 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(39)
 }
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(44),
-  /* template */
-  __webpack_require__(46),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(44)
+/* template */
+var __vue_template__ = __webpack_require__(46)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/home/thms/Dropbox/Projects/yoyo-analytics/resources/assets/js/components/ImportData.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ImportData.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ImportData.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47800,33 +47812,56 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('vue-clip', {
-    attrs: {
-      "options": _vm.options
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vue-clip",
+    {
+      attrs: { options: _vm.options },
+      scopedSlots: _vm._u([
+        {
+          key: "clip-uploader-body",
+          fn: function(props) {
+            return _vm._l(props.files, function(file) {
+              return _c("div", [
+                _c("img", { attrs: { src: file.dataUrl } }),
+                _vm._v(
+                  "\n            " +
+                    _vm._s(file.name) +
+                    " " +
+                    _vm._s(file.status) +
+                    "\n        "
+                )
+              ])
+            })
+          }
+        }
+      ])
     },
-    scopedSlots: _vm._u([{
-      key: "clip-uploader-body",
-      fn: function(props) {
-        return _vm._l((props.files), function(file) {
-          return _c('div', [_c('img', {
-            attrs: {
-              "src": file.dataUrl
-            }
-          }), _vm._v("\n            " + _vm._s(file.name) + " " + _vm._s(file.status) + "\n        ")])
-        })
-      }
-    }])
-  }, [_c('template', {
-    attrs: {
-      "slot": "clip-uploader-action"
-    },
-    slot: "clip-uploader-action"
-  }, [_c('div', [_c('div', {
-    staticClass: "dz-message"
-  }, [_c('h2', [_vm._v(" Click or Drag and Drop files here upload ")])])])])], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
+    [
+      _c(
+        "template",
+        {
+          attrs: { slot: "clip-uploader-action" },
+          slot: "clip-uploader-action"
+        },
+        [
+          _c("div", [
+            _c("div", { staticClass: "dz-message" }, [
+              _c("h2", [_vm._v(" Click or Drag and Drop files here upload ")])
+            ])
+          ])
+        ]
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaction;
+use Illuminate\Support\Facades\DB;
 
 class TransactionsController extends Controller
 {
@@ -21,9 +22,19 @@ class TransactionsController extends Controller
 		return $transaction;
 	}
 
-	public function getOutletTotals($outlet)
+	public function getOutletTotals()
     {
-        dd($outlet);
+        $outlet = $_GET['outlet'];
+        //$transactions = Transaction::where('outlet_id',$outlet)->orderBy('date','asc')->get();
+       $totals = DB::table('transactions')
+            ->where('outlet_id',$outlet)
+           ->select(DB::raw('DATE(date) as date'), DB::raw('sum(spent) as total'))
+           ->groupBy(DB::raw('Date(date)') )
+           ->orderBy('date')
+            ->get();
+
+
+       return $totals;
     }
 
     public function getOutletTakings()

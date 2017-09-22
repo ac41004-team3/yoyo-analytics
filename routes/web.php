@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('getOutletTotals', 'TransactionsController@getOutletTotals');
+Route::get('/getOutletTotals/{id}', 'TransactionsController@getOutletTotals');
 
 
 Auth::routes();

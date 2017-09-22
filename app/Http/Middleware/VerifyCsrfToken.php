@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         // TODO: Remove need for exclusion
         '/import',
+        '/getOutletTotals',
     ];
 }
