@@ -37,7 +37,7 @@
 
           url: 'getOutletTotals/{outlet}',
           method: 'GET',
-          data: {outlet: "238"},
+          data: {outlet: "241"},
           success: function (data) {
          // debugger;
               //alert(data);
@@ -66,7 +66,8 @@
 
         $.each(data, function(index,value){
                 var date=new Date(value.date)
-            points.push({x:date, y:value.total});
+            var total= value.total/100;
+            points.push({x:date, y:total});
 
 
         });
