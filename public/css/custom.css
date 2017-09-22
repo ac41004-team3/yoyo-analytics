@@ -1,6 +1,5 @@
 /* analytic page links */
 .selectionBox {
-    font-size: 1.1em;
     font-weight: bold;
     text-align: center;
     margin: 10px;
@@ -8,9 +7,10 @@
 
 .selectionBox img {
     transition: 1s ease;
-    height: 50%;
-    width: 50%;
+    height: 50px;
+    width: 50px;
 }
+
 
 .selectionBox img:hover{
     -webkit-transform: scale(1.2);
@@ -19,12 +19,14 @@
     transition: 1s ease;
 }
 
+
 h1 {
       display: inline-block;
 }
 
 body {
-    padding-top:35px;
+    padding-top:75px;
+    width: 95%;
 }
 
 /* flashing links */
@@ -51,3 +53,5 @@ body {
     opacity: 1;
     }
 }
+
+
