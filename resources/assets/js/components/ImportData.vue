@@ -21,7 +21,7 @@
         data() {
             return {
                 options: {
-                    url: '/import',
+                    url: '/admin/import',
                     paramName: 'data',
                 },
             };

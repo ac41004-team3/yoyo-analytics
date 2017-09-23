@@ -13,6 +13,8 @@
 Route::get('/getOutletTotals/{id}', 'TransactionsController@getOutletTotals');
 
 
+use App\Import;
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
@@ -21,14 +23,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group([
         'as' => 'admin.',
         'prefix' => 'admin',
-        'middleware' => ['role:admin'],
+        'middleware' => ['role:admin|super admin'],
     ], function () {
         Route::resource('/users', 'UserController');
-    });
 
-    Route::group(['as' => 'import.', 'prefix' => 'import'], function () {
-        Route::get('/', 'ImportController@index')->name('index');
-        Route::post('/', 'ImportController@store')->name('store');
+        Route::group([
+            'as' => 'import.',
+            'prefix' => 'import',
+            'middleware' => ['permission:manage-data'],
+        ], function () {
+            Route::get('/', 'ImportController@index')->name('index');
+            Route::post('/', 'ImportController@store')->name('store');
+            Route::post('/revert', 'ImportController@revert')->name('revert');
+        });
     });
 
     Route::view('/takings', 'takings');
