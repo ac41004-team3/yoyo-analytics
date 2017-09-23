@@ -17,7 +17,6 @@ class TransactionsController extends Controller
 	
     public function show(Transaction $transaction)
     {
-		$transaction = Transaction::find($id);
 		return $transaction;
 	}
 }
