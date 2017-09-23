@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // TODO: Remove need for exclusion
+        '/admin/import',
     ];
 }

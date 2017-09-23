@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    public $incrementing = false;
     protected $fillable = [
         'id'
     ];
-
-    public $incrementing = false;
 
     public function transactions()
     {

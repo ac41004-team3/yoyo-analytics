@@ -67,6 +67,7 @@ $factory->define(App\Transaction::class, function(Faker $faker) {
         'customer_id' => function() {
             return factory(App\Customer::class)->create()->id;
         },
+        'date' => now(),
         'type' => $type,
         'spent' => $spent,
         'discount' => $discount,

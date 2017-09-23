@@ -16,6 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('import-data', require('./components/ImportData.vue'));
+Vue.component('revert-import', require('./components/RevertImport'));
 
 const app = new Vue({
     el: '#app'

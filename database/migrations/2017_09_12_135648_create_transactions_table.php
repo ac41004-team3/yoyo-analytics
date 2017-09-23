@@ -17,7 +17,9 @@ class CreateTransactionsTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('outlet_id')->unsigned();
             $table->string('customer_id');
+            $table->integer('import_id')->unsigned();
 
+            $table->dateTime('date');
             $table->string('type');
             $table->integer('spent');
             $table->integer('discount');
@@ -31,6 +33,10 @@ class CreateTransactionsTable extends Migration
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers')
+                ->onDelete('cascade');
+            $table->foreign('import_id')
+                ->references('id')
+                ->on('imports')
                 ->onDelete('cascade');
         });
     }
