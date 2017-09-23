@@ -1,0 +1,53 @@
+/* analytic page links */
+.selectionBox {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+.selectionBox img {
+    transition: 1s ease;
+    height: 50%;
+    width: 50%;
+}
+
+.selectionBox img:hover{
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: 1s ease;
+}
+
+h1 {
+      display: inline-block;
+}
+
+body {
+    padding-top:35px;
+}
+
+/* flashing links */
+.linkHover a:hover {
+    opacity: 1;
+    -webkit-animation: flash 1.5s;
+    animation: flash 1.5s;
+}
+
+@-webkit-keyframes flash {
+    0% {
+    opacity: .4;
+    }
+    100% {
+    opacity: 1;
+    }
+}
+
+@keyframes flash {
+    0% {
+    opacity: .4;
+    }
+    100% {
+    opacity: 1;
+    }
+}
