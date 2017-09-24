@@ -47,10 +47,11 @@
         <canvas id="myChart" width="100" height="50"></canvas>
         <script>
 		//I will probably load in all data by default and simply trip the hidden:true|false
-		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
+		var outlets = $.getJSON('http://127.0.0.1:8000/outlets'); //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
-
+        console.log(outlets);
+        console.log(transactions);
 		for (i in transactions)
 		{
 			//document.write(transactions[i].date + "<br />");
