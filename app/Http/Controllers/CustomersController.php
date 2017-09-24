@@ -12,12 +12,12 @@ class CustomersController extends Controller
 		$customers = Customer::all();
 		return $customers;
 		//return view('transactions.index', compact('transactions'));
-		//return view('outlets.index', compact('outlets'));
+		//return view('customers.index', compact('customers'));
 	}
-	
+
     public function show(Customer $customer)
     {
-		$customer = Customer::find($customer_id);
 		return $customer;
+        //return view('customers.show', compact('show'));
 	}
 }
