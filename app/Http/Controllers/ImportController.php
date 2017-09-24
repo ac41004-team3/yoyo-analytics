@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\FileUploaded;
+use App\Import;
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class ImportController extends Controller
@@ -14,7 +16,7 @@ class ImportController extends Controller
      */
     public function index()
     {
-        return view('import.index');
+        return view('admin.import.index');
     }
 
     /**
@@ -35,5 +37,14 @@ class ImportController extends Controller
 
         event(new FileUploaded($file));
         return response(200);
+    }
+
+    public function revert(Request $request)
+    {
+        $import = Import::findOrFail($request->input('id'));
+        $import->transactions()->each(function ($transaction) {
+            return $transaction->delete();
+        });
+        return 200;
     }
 }

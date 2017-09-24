@@ -33,7 +33,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function outlets() {
-        $this->hasMany('App\Outlet');
+    public function outlets()
+    {
+        return $this->belongsToMany('App\Outlet');
+    }
+
+    public function imports()
+    {
+        return $this->hasMany('App\Import');
     }
 }
