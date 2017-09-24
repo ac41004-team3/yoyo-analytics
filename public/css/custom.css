@@ -2,7 +2,6 @@
 .selectionBox {
     font-weight: bold;
     text-align: center;
-    margin: 10px;
 }
 
 .selectionBox img {
@@ -11,6 +10,9 @@
     width: 50px;
 }
 
+.selectionBox p{
+    font-size: inherit;    
+}
 
 .selectionBox img:hover{
     -webkit-transform: scale(1.2);
@@ -19,14 +21,13 @@
     transition: 1s ease;
 }
 
-
 h1 {
       display: inline-block;
 }
 
 body {
     padding-top:75px;
-    width: 95%;
+    
 }
 
 /* flashing links */
