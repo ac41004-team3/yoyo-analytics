@@ -3,35 +3,53 @@
 @section('content')
 
 <div class="container-fluid">
+    
     <div class="row">
+        
         <div class="col-sm-8">
+            <div class="row">
+            <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Your Chart</div>
                 <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
             </div>
-            <button id="" onclick="buildChart()">Build Chart</button>
+                
         </div>
-        <div class="col-sm-4">
+        </div>
+            
             <div class="row">
+                
                 <div class="col-sm-12">
-                    <h4><b>Time Selection</b></h4>
-                    <div class="row">
-                        <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 selectionBox">
-                            <br>
-                            <input type="text" id="StartDate" value="">
-                            <p>Start Date</p>
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 selectionBox">
-                            <br>
-                            <input type="text" id="EndDate" value="">
-                            <p>End Date</p>
-                        </div>
-                    </div>
+                    
                 </div>
+                
+            </div>
+        </div>
+        
+        <div class="col-sm-4">
+            <div style="text-align:center;">
+                <button class="customButton form-control" id="" onclick="buildChart()">Build Chart</button>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <h4><b>Chart Selection</b></h4>
+                    <h4 class="page-header"><b>Time Selection</b></h4>
+                    <div class="row">
+                        <form class="form-inline">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> 
+                           <input type="text" id="StartDate" class="form-control" placeholder="Start Date..." value="">
+                        </div>
+                             
+                        <div class="col-xs-5 col-xs-offset-2 col-sm-5 col-sm-offset-2 col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2">
+                           <input type="text" id="EndDate" class="form-control" placeholder="End Date..." value="">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="page-header"><b>Chart Selection</b></h4>
                     <div class="row">
                         <div id="1" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('line', this);">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/line-graphic.svg')}}" alt="Line Graph Icon">
@@ -52,9 +70,10 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-sm-12">
-                    <h4><b>Measurement</b></h4>
+                    <h4 class="page-header"><b>Measurement Selection</b></h4>
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(1, this)">
                             <p>Transaction Total</p>
@@ -89,7 +108,7 @@
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4><b>Tribe Selection</b></h4>
+                            <h4 class="page-header"><b>Tribe Selection</b></h4>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(3, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/whale.svg')}}" alt="Whales Tribal Icon">
@@ -113,8 +132,10 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4><b>Outlet Selection</b></h4>
-                        </div>
+                            <h4 class="page-header"><b>Outlet Selection</b></h4>
+                            
+                        <div class="outletsContainer">
+                            
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(237, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/floorfive.svg')}}" alt="Floor Five Icon">
                             <p>Floor Five</p>
@@ -133,7 +154,7 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(243, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/reception.svg')}}" alt="Level 2 Reception Icon">
-                            <p>L2 Reception</p>
+                            <p>Level 2 Reception</p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(242, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/mono.svg')}}" alt="Mono Bar Icon">
@@ -167,6 +188,7 @@
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/dusa_marketplace.svg')}}" alt="DUSA Marketplace Icon">
                             <p>DUSA Marketplace</p>
                         </div>
+                      </div>
                     </div>
                 </div>
             </div>
