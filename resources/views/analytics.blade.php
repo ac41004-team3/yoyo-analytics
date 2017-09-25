@@ -3,147 +3,197 @@
 @section('content')
 
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Your Chart</div>
                 <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
             </div>
+            <button id="" onclick="buildChart()">Build Chart</button>
         </div>
-
         <div class="col-sm-4">
-
-        <div class="row">
-        <div class="col-sm-12">
-            <h4><b>Chart Selection</b></h4>
-        <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" style="cursor: pointer;">
-                <img class="img-fluid" src="{{ URL::asset('/images/charts/line-graphic.svg')}}" alt="Line Graph Icon">
-                <p>Line</p>
-            </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/charts/bar-chart.svg')}}" alt="Bar Chart Icon">
-                <p>Bar</p>
-            </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/charts/pie-chart.svg')}}" alt="Pie Chart Icon">
-                <p>Pie</p>
-            </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/charts/radar-chart.svg')}}" alt="Radar Chart Icon">
-                <p>Radar</p>
-            </div>
-        </div>
-        </div>
-        </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-
             <div class="row">
-             <div class="col-sm-12">
-                 <h4><b>Tribe Selection</b></h4>
-             </div>
+                <div class="col-sm-12">
+                    <h4><b>Time Selection</b></h4>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 selectionBox">
+                            <br>
+                            <input type="text" id="StartDate" value="">
+                            <p>Start Date</p>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 selectionBox">
+                            <br>
+                            <input type="text" id="EndDate" value="">
+                            <p>End Date</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><b>Chart Selection</b></h4>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('line')">
+                            <img class="img-fluid" src="{{ URL::asset('/images/charts/line-graphic.svg')}}" alt="Line Graph Icon">
+                            <p>Line</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('bar')">
+                            <img class="img-fluid" src="{{ URL::asset('/images/charts/bar-chart.svg')}}" alt="Bar Chart Icon">
+                            <p>Bar</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
+                            <img class="img-fluid" src="{{ URL::asset('/images/charts/pie-chart.svg')}}" alt="Pie Chart Icon">
+                            <p>Pie</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('line')">
+                            <img class="img-fluid" src="{{ URL::asset('/images/charts/radar-chart.svg')}}" alt="Radar Chart Icon">
+                            <p>Radar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><b>Measurement</b></h4>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(1)">
+                            <p>Transaction Total</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(2)">
+                            <p>Discount Total</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(3)">
+                            <p>Spent Total</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(4)">
+                            <p>Transaction Count</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(6)">
+                            <p>Amount of Payments</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(5)">
+                            <p>Amount of Redemptions</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(5)">
+                            <p>User ID Select</p>
+                            <select size="5" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
+                                <option value="None">None</option>
+                                @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->id }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4><b>Tribe Selection</b></h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(3)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/tribes/whale.svg')}}" alt="Whales Tribal Icon">
+                            <p>Whales</p>
+                        </div>
 
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/tribes/whale.svg')}}" alt="Whales Tribal Icon">
-                <p>Whales</p>
-            </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(2)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/tribes/chicken.svg')}}" alt="Early Birds Tribal Icon">
+                            <p>Early Birds</p>
+                        </div>
 
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/tribes/chicken.svg')}}" alt="Early Birds Tribal Icon">
-                <p>Early Birds</p>
-            </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(1)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/tribes/owl.svg')}}" alt="Night Owl Tribal Icon">
+                            <p>Night Owls</p>
+                        </div>
 
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/tribes/owl.svg')}}" alt="Night Owl Tribal Icon">
-                <p>Night Owls</p>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
+                            <img class="img-fluid" src="{{ URL::asset('/images/tribes/boss.svg')}}" alt="Creatures of Habit Tribal Icon">
+                            <p>Creatures of Habit</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4><b>Outlet Selection</b></h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(237)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/floorfive.svg')}}" alt="Floor Five Icon">
+                            <p>Floor Five</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(236)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/air_bar.svg')}}" alt="Air Bar Icon">
+                            <p>Air Bar</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(240)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/foodonfour.svg')}}" alt="Food on Four Icon">
+                            <p>Food on Four</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(241)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/liar_bar.svg')}}" alt="Liar Bar Icon">
+                            <p>Liar Bar</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(243)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/reception.svg')}}" alt="Level 2 Reception Icon">
+                            <p>L2 Reception</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(242)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/mono.svg')}}" alt="Mono Bar Icon">
+                            <p>Mono Bar</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(238)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/library.svg')}}" alt="Main Library Icon">
+                            <p>Main Library</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(239)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/cafe.svg')}}" alt="Dental Cafe Icon">
+                            <p>Dental Café</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(235)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/djcad_cantina.svg')}}" alt="DJCAD Cantina Icon">
+                            <p>DJCAD Cantina</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(2679)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/ninewells.svg')}}" alt="Ninewells Shop Icon">
+                            <p>Ninewells Shop</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(343)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/premier.svg')}}" alt="Premier Shop Icon">
+                            <p>Premier Shop</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(2677)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/collegeshop.svg')}}" alt="College Shop Icon">
+                            <p>College Shop</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(456)">
+                            <img class="img-fluid" src="{{ URL::asset('/images/outlets/dusa_marketplace.svg')}}" alt="DUSA Marketplace Icon">
+                            <p>DUSA Marketplace</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/tribes/boss.svg')}}" alt="Creatures of Habit Tribal Icon">
-                <p>Creatures of Habit</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><b>User Select</b></h4>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
+                            <br>
+                            <select size="5" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
+                                <option value="None">None</option>
+                                @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->id }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-
-         <div class="row">
-             <div class="col-sm-12">
-                 <h4><b>Outlet Selection</b></h4>
-             </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/floorfive.svg')}}" alt="Floor Five Icon">
-                <p>Floor Five</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/air_bar.svg')}}" alt="Air Bar Icon">
-                <p>Air Bar</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/foodonfour.svg')}}" alt="Food on Four Icon">
-              <p>Food on Four</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/liar_bar.svg')}}" alt="Liar Bar Icon">
-              <p>Liar Bar</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/reception.svg')}}" alt="Level 2 Reception Icon">
-              <p>Level 2 Reception</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/mono.svg')}}" alt="Mono Bar Icon">
-                <p>Mono Bar</p>
-            </div>
-
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/library.svg')}}" alt="Main Library Icon">
-                <p>Main Library</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/cafe.svg')}}" alt="Dental Cafe Icon">
-                <p>Dental Café</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/djcad_cantina.svg')}}" alt="DJCAD Cantina Icon">
-              <p>DJCAD Cantina</p>
-            </div>
-
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/ninewells.svg')}}" alt="Ninewells Shop Icon">
-              <p>Ninewells Shop</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/premier.svg')}}" alt="Premier Shop Icon">
-              <p>Premier Shop</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-              <img class="img-fluid" src="{{ URL::asset('/images/outlets/collegeshop.svg')}}" alt="College Shop Icon">
-              <p>College Shop</p>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                <img class="img-fluid" src="{{ URL::asset('/images/outlets/dusa_marketplace.svg')}}" alt="DUSA Marketplace Icon">
-                <p>DUSA Marketplace</p>
-            </div>
-         </div>
         </div>
     </div>
-        </div>
-    </div>
-
-</div>
-<div>
-
 </div>
 @endsection
 @section('scripts')
 <script>
-window.onload = function() {
+//window.onload = function() {
     var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
     var transactions = {!! json_encode($transactions->toArray()) !!};
     var customers = {!! json_encode($customers->toArray()) !!};
@@ -162,6 +212,7 @@ window.onload = function() {
         periodDefinition: null,
         outlets: []
     };
+    console.log(currentChart);
 
     var barChartData = {//each dataset will be a different outlet essentially
         labels: [],
@@ -186,19 +237,19 @@ window.onload = function() {
 
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
-    type: 'line',
+        type: 'line',
         data: barChartData,
         options: {
             scales: {
                 yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
     });
-}
+//}
 function changeChartType(chartType) {
     currentChart.type = chartType;
 }
@@ -282,17 +333,17 @@ function buildChart() {
     }
     myChart.destroy();
     myChart = new Chart(ctx, {
-    type: currentChart.type,
+        type: currentChart.type,
         data: barChartData,
         options: {
             responsive: true,
             scales: {
                 yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
         }
     });
 }
@@ -348,35 +399,35 @@ function calculateData(currentOutletID) {
             sum = 0;
         }
         switch (currentChart.metric) {
-             case 1:
-             sum += transactionList[j].total / 100;
-             break;
-             case 2:
-             sum += transactionList[j].discount / 100;
-             break;
-             case 3:
-             sum += transactionList[j].spent / 100;
-             break;
-             case 4:
-             sum += 1;
-             break;
-             case 5:
-             if (transactionList[j].type === "Redemption") {
-                 sum += 1;
-             }
-             break;
-             case 6:
-             if (transactionList[j].type === "Payment") {
-                 sum += 1;
-             }
-             break;
-             default:
-             break;
+            case 1:
+            sum += transactionList[j].total / 100;
+            break;
+            case 2:
+            sum += transactionList[j].discount / 100;
+            break;
+            case 3:
+            sum += transactionList[j].spent / 100;
+            break;
+            case 4:
+            sum += 1;
+            break;
+            case 5:
+            if (transactionList[j].type === "Redemption") {
+                sum += 1;
+            }
+            break;
+            case 6:
+            if (transactionList[j].type === "Payment") {
+                sum += 1;
+            }
+            break;
+            default:
+            break;
         }
         lastTime = moment(transactionList[j].date).format("YYYY-MM-DD");
     }
     if (sum > 0) {
-         metricCalculation[lastTime] = sum;
+        metricCalculation[lastTime] = sum;
     }
     return metricCalculation;
 }
@@ -393,5 +444,6 @@ function getRandomColor() {
 function minutesOfDay(m) {
     return m.minutes() + m.hours() * 60;
 }
+
 </script>
 @endsection
