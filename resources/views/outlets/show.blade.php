@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+    <title></title>
 </head>
 <body>
-	<h1>{{ $outlet->name }}</h1>
+<h1>{{ $outlet->name }}</h1>
 </body>
 </html>
