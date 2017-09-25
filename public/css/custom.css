@@ -2,6 +2,7 @@
 .selectionBox {
     font-weight: bold;
     text-align: center;
+    cursor: pointer;
 }
 
 .selectionBox img {
@@ -11,7 +12,7 @@
 }
 
 .selectionBox p{
-    font-size: inherit;    
+    font-size: inherit;
 }
 
 .selectionBox img:hover{
@@ -26,7 +27,7 @@ h1 {
 }
 
 body {
-    padding-top:75px; 
+    padding-top:75px;
 }
 
 /* flashing links */
@@ -53,4 +54,3 @@ body {
     opacity: 1;
     }
 }
-
