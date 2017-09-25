@@ -11,7 +11,7 @@
 }
 
 .selectionBox p{
-    font-size: inherit;    
+    font-size: inherit;
 }
 
 .selectionBox img:hover{
@@ -21,12 +21,17 @@
     transition: 1s ease;
 }
 
+.clickable-button {
+    cursor: pointer;
+    background-color: rgb(255,255,255);
+}
+
 h1 {
       display: inline-block;
 }
 
 body {
-    padding-top:75px; 
+    padding-top:75px;
 }
 
 /* flashing links */
@@ -53,4 +58,3 @@ body {
     opacity: 1;
     }
 }
-
