@@ -71,10 +71,15 @@
          </div>
             
          <div class="row">
+             
+             
+             
              <div class="col-sm-12">
                  <h4><b>Outlet Selection</b></h4>
-             </div>                   
-            
+                 <div class="outletsContainer">
+             
+             
+             
             <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
                 <img class="img-fluid" src="{{ URL::asset('/images/outlets/floorfive.svg')}}" alt="Floor Five Icon">
                 <p>Floor Five</p>
@@ -99,8 +104,7 @@
                 <img class="img-fluid" src="{{ URL::asset('/images/outlets/mono.svg')}}" alt="Mono Bar Icon">
                 <p>Mono Bar</p>
             </div>
-
-     
+        
             <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
                 <img class="img-fluid" src="{{ URL::asset('/images/outlets/library.svg')}}" alt="Main Library Icon">
                 <p>Main Library</p>
