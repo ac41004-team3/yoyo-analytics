@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Outlet;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class UserController extends Controller
                 return $user->hasRole('admin');
             });
             $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
-              return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
+                return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
             });
         } else {
             // not allowed

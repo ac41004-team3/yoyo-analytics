@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Import Data</div>
                     <div class="panel-body">
@@ -11,9 +11,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Import History</div>
                     <div class="panel-body">
@@ -38,7 +36,10 @@
                                     @else
                                         <td><i class="fa fa-times" aria-hidden="true"></i></td>
                                     @endif
-                                    <td><revert-import id="{{ $import->id }}" action="{{ route('admin.import.revert') }}"></revert-import></td>
+                                    <td>
+                                        <revert-import id="{{ $import->id }}"
+                                                       action="{{ route('admin.import.revert') }}"></revert-import>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

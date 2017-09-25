@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-6 col-md-offset-6">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Editing</h3>
@@ -47,7 +47,8 @@
                                 <option value="0">Yes</option>
                                 <option value="1">No</option>
                             </select>
-                            @if ($errors->has('is_active')) <p class="help-block">{{ $errors->first('is_active') }}</p> @endif
+                            @if ($errors->has('is_active')) <p
+                                    class="help-block">{{ $errors->first('is_active') }}</p> @endif
                         </div>
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <div>
