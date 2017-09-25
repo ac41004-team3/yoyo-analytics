@@ -50,7 +50,8 @@
 		var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 		var transactions = {!! json_encode($transactions->toArray()) !!};
 		var customers = {!! json_encode($customers->toArray()) !!};
-
+        console.log(outlets);
+        console.log(transactions);
 		for (i in transactions)
 		{
 			//document.write(transactions[i].date + "<br />");
