@@ -4,6 +4,13 @@
     flex-wrap: wrap;
 }
 
+.customButton{
+    font-size: 200%;
+    font-weight: bold;
+    height: auto;
+    display: inline-block;
+}
+
 .selectionBox {
     text-align: center;
 }
@@ -15,7 +22,7 @@
 }
 
 .selectionBox p{
-    font-size: 110%;
+    font-size: 100%;
     font-weight: bold;
 }
 
