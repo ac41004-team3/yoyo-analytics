@@ -33,19 +33,19 @@
                 <div class="col-sm-12">
                     <h4><b>Chart Selection</b></h4>
                     <div class="row">
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('line')">
+                        <div id="1" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('line', this);">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/line-graphic.svg')}}" alt="Line Graph Icon">
                             <p>Line</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('bar')">
+                        <div id="2" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('bar', this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/bar-chart.svg')}}" alt="Bar Chart Icon">
                             <p>Bar</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
+                        <div id="3" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/pie-chart.svg')}}" alt="Pie Chart Icon">
                             <p>Pie</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="changeChartType('line')">
+                        <div id="4" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('radar', this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/radar-chart.svg')}}" alt="Radar Chart Icon">
                             <p>Radar</p>
                         </div>
@@ -56,26 +56,25 @@
                 <div class="col-sm-12">
                     <h4><b>Measurement</b></h4>
                     <div class="row">
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(1)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(1, this)">
                             <p>Transaction Total</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(2)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(2, this)">
                             <p>Discount Total</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(3)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(3, this)">
                             <p>Spent Total</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(4)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(4, this)">
                             <p>Transaction Count</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(6)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(6, this)">
                             <p>Amount of Payments</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(5)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(5, this)">
                             <p>Amount of Redemptions</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setMetric(5)">
-                            <p>User ID Select</p>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
                             <select size="5" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
                                 <option value="None">None</option>
                                 @foreach ($customers as $customer)
@@ -92,22 +91,22 @@
                         <div class="col-sm-12">
                             <h4><b>Tribe Selection</b></h4>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(3)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(3, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/whale.svg')}}" alt="Whales Tribal Icon">
                             <p>Whales</p>
                         </div>
 
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(2)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(2, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/chicken.svg')}}" alt="Early Birds Tribal Icon">
                             <p>Early Birds</p>
                         </div>
 
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="setTribe(1)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(1, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/owl.svg')}}" alt="Night Owl Tribal Icon">
                             <p>Night Owls</p>
                         </div>
 
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/boss.svg')}}" alt="Creatures of Habit Tribal Icon">
                             <p>Creatures of Habit</p>
                         </div>
@@ -116,73 +115,57 @@
                         <div class="col-sm-12">
                             <h4><b>Outlet Selection</b></h4>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(237)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(237, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/floorfive.svg')}}" alt="Floor Five Icon">
                             <p>Floor Five</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(236)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(236, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/air_bar.svg')}}" alt="Air Bar Icon">
                             <p>Air Bar</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(240)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(240, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/foodonfour.svg')}}" alt="Food on Four Icon">
                             <p>Food on Four</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(241)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(241, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/liar_bar.svg')}}" alt="Liar Bar Icon">
                             <p>Liar Bar</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(243)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(243, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/reception.svg')}}" alt="Level 2 Reception Icon">
                             <p>L2 Reception</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(242)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(242, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/mono.svg')}}" alt="Mono Bar Icon">
                             <p>Mono Bar</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(238)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(238, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/library.svg')}}" alt="Main Library Icon">
                             <p>Main Library</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(239)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(239, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/cafe.svg')}}" alt="Dental Cafe Icon">
                             <p>Dental Café</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(235)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(235, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/djcad_cantina.svg')}}" alt="DJCAD Cantina Icon">
                             <p>DJCAD Cantina</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(2679)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(2679, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/ninewells.svg')}}" alt="Ninewells Shop Icon">
                             <p>Ninewells Shop</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(343)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(343, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/premier.svg')}}" alt="Premier Shop Icon">
                             <p>Premier Shop</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(2677)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(2677, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/collegeshop.svg')}}" alt="College Shop Icon">
                             <p>College Shop</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox" onclick="addOutlet(456)">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(456, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/dusa_marketplace.svg')}}" alt="DUSA Marketplace Icon">
                             <p>DUSA Marketplace</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <h4><b>User Select</b></h4>
-                    <div class="row">
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
-                            <br>
-                            <select size="5" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
-                                <option value="None">None</option>
-                                @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}">{{ $customer->id }}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -194,81 +177,126 @@
 @section('scripts')
 <script>
 //window.onload = function() {
-    var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
-    var transactions = {!! json_encode($transactions->toArray()) !!};
-    var customers = {!! json_encode($customers->toArray()) !!};
-    console.log(customers);
-    for (i in transactions)
-    {
-        //document.write(transactions[i].date + "<br />");
+//var elems = document.getElementsByClassName("clickable-button");
+/*for (var i = 0; i < elems.length; i++) {
+    elems[i].onclick = function() {
+        var color = window.getComputedStyle(this, null)
+        .getPropertyValue("background-color");
+        this.style.backgroundColor = color === "rgb(255, 255, 255)"
+        ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
+    };
+};*/
+var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
+var transactions = {!! json_encode($transactions->toArray()) !!};
+var customers = {!! json_encode($customers->toArray()) !!};
+var currentChart = { //Object which holds data on current chart, modify using setter methods
+    type: null,
+    metric: null,
+    user: 'None',
+    tribe: 0,
+    timePeriod: [], //Lower Bound, Now
+    periodDefinition: null,
+    outlets: []
+};
+
+var barChartData = {//each dataset will be a different outlet essentially
+    labels: [],
+    datasets: []
+};
+
+var startDatePicker = new Pikaday({
+    field: document.getElementById('StartDate'),
+    maxDate: moment().toDate(),
+    onSelect: function() {
+        currentChart.timePeriod[0] = this.getMoment().add(1,'hours');
     }
+});
 
-    var currentChart = { //Object which holds data on current chart, modify using setter methods
-        type: null,
-        metric: null,
-        user: 'None',
-        tribe: 0,
-        timePeriod: [], //Lower Bound, Now
-        periodDefinition: null,
-        outlets: []
-    };
-    console.log(currentChart);
+var endDatePicker = new Pikaday({
+    field: document.getElementById('EndDate'),
+    maxDate: moment().toDate(),
+    onSelect: function() {
+        currentChart.timePeriod[1] = this.getMoment().add(24, 'hours');
+    }
+});
 
-    var barChartData = {//each dataset will be a different outlet essentially
-        labels: [],
-        datasets: []
-    };
-
-    var startDatePicker = new Pikaday({
-        field: document.getElementById('StartDate'),
-        maxDate: moment().toDate(),
-        onSelect: function() {
-            currentChart.timePeriod[0] = this.getMoment().add(1,'hours');
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: barChartData,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
         }
-    });
-
-    var endDatePicker = new Pikaday({
-        field: document.getElementById('EndDate'),
-        maxDate: moment().toDate(),
-        onSelect: function() {
-            currentChart.timePeriod[1] = this.getMoment().add(24, 'hours');
-        }
-    });
-
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: barChartData,
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-    });
+    }
+});
 //}
-function changeChartType(chartType) {
+function changeChartType(chartType, define) {
+    var elems = document.getElementsByClassName("chart-button");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].style.backgroundColor = "rgb(255, 255, 255)";
+    }
+    var color = window.getComputedStyle(define).getPropertyValue("background-color");
+    define.style.backgroundColor = color === "rgb(255, 255, 255)"
+    ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
     currentChart.type = chartType;
+
+    /*var color = window.getComputedStyle(this, null).getPropertyValue("background-color");
+    this.style.backgroundColor = color === "rgb(255, 255, 255)"
+    ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";*/
 }
 
-function addOutlet(outletID) {
+/*function addColour() {
+    var elems = document.getElementsByClassName("clickable-button");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i] = function() {
+            var color = window.getComputedStyle(this, null).getPropertyValue("background-color");
+            this.style.backgroundColor = color === "rgb(255, 255, 255)"
+            ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
+        };
+    };
+}*/
+
+function addOutlet(outletID, define) {
+    var elems = document.getElementsByClassName("outlet-button");
+    for (var i = 0; i < elems.length; i++) {
+        var color = window.getComputedStyle(define).getPropertyValue("background-color");
+        define.style.backgroundColor = color === "rgb(255, 255, 255)"
+        ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
+    }
     currentChart.outlets.indexOf(outletID) === -1 ? currentChart.outlets.push(outletID) : currentChart.outlets.splice(currentChart.outlets.indexOf(outletID), 1);
 }
 
-function setMetric(metric) {
+function setMetric(metric, define) {
+    var elems = document.getElementsByClassName("measurement-button");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].style.backgroundColor = "rgb(255, 255, 255)";
+    }
+    var color = window.getComputedStyle(define).getPropertyValue("background-color");
+    define.style.backgroundColor = color === "rgb(255, 255, 255)"
+    ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
     currentChart.metric = metric;
 }
 
-function setTribe(tribe) {
+function setTribe(tribe, define) {
+    var elems = document.getElementsByClassName("tribe-button");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].style.backgroundColor = "rgb(255, 255, 255)";
+    }
+    var color = window.getComputedStyle(define).getPropertyValue("background-color");
+    define.style.backgroundColor = color === "rgb(255, 255, 255)"
+    ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
     if (currentChart.tribe === tribe) {
         currentChart.tribe = 0;
     }
     else {
         currentChart.tribe = tribe;
     }
+    console.log(currentChart.tribe);
 }
 function setUser(user) {
     currentChart.user = user;
