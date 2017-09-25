@@ -1,7 +1,11 @@
 /* analytic page links */
+.outletsContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .selectionBox {
-    font-weight: bold;
-    text-align: center;
+ text-align: center;
 }
 
 .selectionBox img {
@@ -11,7 +15,8 @@
 }
 
 .selectionBox p{
-    font-size: inherit;    
+    font-size: 110%;
+    font-weight: bold;
 }
 
 .selectionBox img:hover{
