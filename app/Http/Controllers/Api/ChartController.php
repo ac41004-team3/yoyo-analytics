@@ -7,7 +7,6 @@ use App\Outlet;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ChartController extends Controller
 {
@@ -137,8 +136,6 @@ class ChartController extends Controller
      */
     private function position($date)
     {
-        Log::debug('FROM:' . $this->from);
-        Log::debug('TO:' . $this->to);
         return $date->diffInDays($this->from);
     }
 }
