@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,10 +14,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+
 Vue.component('import-data', require('./components/ImportData.vue'));
-Vue.component('revert-import', require('./components/RevertImport'));
+Vue.component('revert-import', require('./components/RevertImport.vue'));
+Vue.component('chart', require('./components/Chart.vue'));
+Vue.component('outlet-select', require('./components/OutletSelect.vue'));
+Vue.component('datepicker', require('vuejs-datepicker'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });
