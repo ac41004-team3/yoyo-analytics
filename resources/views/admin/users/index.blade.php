@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Add User</h3>
@@ -42,6 +42,10 @@
                             </select>
                             @if ($errors->has('role')) <p class="help-block">{{ $errors->first('role') }}</p> @endif
                         </div>
+                        <div class="form-group  @if ($errors->has('outlets')) has-error @endif">
+                            <outlet-select :outlets="{{ \App\Outlet::all() }}"></outlet-select>
+                            @if ($errors->has('role')) <p class="help-block">{{ $errors->first('role') }}</p> @endif
+                        </div>
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <div>
                                 <button class="btn btn-primary " name="submit" type="submit">
@@ -49,11 +53,12 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Manage Users</h3>

@@ -45,6 +45,13 @@
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right linkHover">
+                    @if(Gate::check('manage-users') || Gate::check('manage-assigned-users'))
+                        <li>
+                            <a href="{{route('admin.users.index')}}">
+                                <span class="glyphicon glyphicon-user">&nbsp;</span>Manage Users
+                            </a>
+                        </li>
+                    @endif
                     @can('manage-data')
                         <li>
                             <a href="{{route('admin.import.index')}}">
