@@ -10,7 +10,7 @@
 
     <h1>Takings</h1>
     <div>
-        <canvas id="myChart"  ></canvas>
+
     </div>
 
     <button id="generate">Generate Chart</button>

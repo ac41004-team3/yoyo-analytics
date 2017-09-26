@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/getOutletTotals/{id}', 'TransactionsController@getOutletTotals');
+Route::get('/getOutletTotals/{outlets}', 'TransactionsController@getOutletTotals');
 
+
+Route::get('/getOutletStats/{outlets}', 'TransactionsController@getOutletStats');
 
 use App\Import;
 
