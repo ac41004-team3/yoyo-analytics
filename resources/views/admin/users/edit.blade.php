@@ -53,13 +53,17 @@
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <div>
                                 <button class="btn btn-primary " name="submit" type="submit">
-                                    Submit
+                                    Save
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            <outlet-select :outlets="{{ \App\Outlet::all() }}" :already="{{ $user->outlets()->get() }}"
+                           action="{{ route('admin.users.outlets', $user->id) }}"></outlet-select>
         </div>
     </div>
 @endsection
