@@ -1,3 +1,12 @@
+.navbar-brand {
+    padding: 0px;
+}
+.navbar-brand>img {
+    height: 100%;
+    padding: 9px;
+    width: auto;
+}
+
 /* analytic page links */
 .outletsContainer{
     display: flex;
