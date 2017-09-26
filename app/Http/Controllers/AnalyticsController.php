@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Outlet;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
 {
-    /**
+     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $outlets = Auth::user()->outlets()->get();
-        $outlets = Outlet::all();
-
-        return view('analytics')->with('outlets', $outlets);
+        $outlets = app('App\Http\Controllers\OutletsController')->index();
+		$customers = app('App\Http\Controllers\CustomersController')->index();
+		$transactions = app('App\Http\Controllers\TransactionsController')->index();
+        return view('analytics', compact('outlets', 'customers', 'transactions'));
     }
 }
