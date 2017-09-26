@@ -8,7 +8,7 @@
             <div class="row">
             <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Your Chart</div>
+                <div class="panel-heading">Your Chart<p>{{ Auth::user()->outlets()->get() }}</p></div>
                 <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
             </div>
         </div>
@@ -123,6 +123,7 @@
                             <p>Creatures of Habit</p>
                         </div>
                     </div>
+                    @if (Auth::user()->outlets()->get() == "[]")
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="page-header"><b>Outlet Selection</b></h4>
@@ -182,6 +183,7 @@
                       </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -190,16 +192,6 @@
 @endsection
 @section('scripts')
 <script>
-//window.onload = function() {
-//var elems = document.getElementsByClassName("clickable-button");
-/*for (var i = 0; i < elems.length; i++) {
-    elems[i].onclick = function() {
-        var color = window.getComputedStyle(this, null)
-        .getPropertyValue("background-color");
-        this.style.backgroundColor = color === "rgb(255, 255, 255)"
-        ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
-    };
-};*/
 var outlets = {!! json_encode($outlets->toArray()) !!}; //Example, array of outlets
 var transactions = {!! json_encode($transactions->toArray()) !!};
 var customers = {!! json_encode($customers->toArray()) !!};
@@ -208,11 +200,13 @@ var currentChart = { //Object which holds data on current chart, modify using se
     metric: null,
     user: 'None',
     tribe: 0,
+    userOutlet: [],
     timePeriod: [], //Lower Bound, Now
     periodDefinition: null,
     outlets: []
 };
-
+currentChart.userOutlet = {!! Auth::user()->outlets()->get() !!};
+currentChart.outlets = currentChart.userOutlet;
 var barChartData = {//each dataset will be a different outlet essentially
     labels: [],
     datasets: []
@@ -260,22 +254,7 @@ function changeChartType(chartType, define) {
     define.style.backgroundColor = color === "rgb(255, 255, 255)"
     ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
     currentChart.type = chartType;
-
-    /*var color = window.getComputedStyle(this, null).getPropertyValue("background-color");
-    this.style.backgroundColor = color === "rgb(255, 255, 255)"
-    ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";*/
 }
-
-/*function addColour() {
-    var elems = document.getElementsByClassName("clickable-button");
-    for (var i = 0; i < elems.length; i++) {
-        elems[i] = function() {
-            var color = window.getComputedStyle(this, null).getPropertyValue("background-color");
-            this.style.backgroundColor = color === "rgb(255, 255, 255)"
-            ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
-        };
-    };
-}*/
 
 function addOutlet(outletID, define) {
     var elems = document.getElementsByClassName("outlet-button");
@@ -341,7 +320,7 @@ function buildChart() {
     for (j in calculations) { //sep method
         switch (currentChart.type) {
             case 'bar':
-            case 'doughnut':
+            case 'bubble':
             var dataList = {
                 label: null,
                 backgroundColor: getRandomColor(),
@@ -387,6 +366,11 @@ function buildChart() {
             responsive: true,
             scales: {
                 yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }],
+                xAxes: [{
                     ticks: {
                         beginAtZero:true
                     }
