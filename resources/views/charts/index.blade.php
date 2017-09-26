@@ -274,6 +274,14 @@
                          sum += 1;
                      }
                      break;
+                     case 7:
+                     if (transactionList[j].type === "Reversal") {
+                         sum += 1;
+                     }
+                     case 8:
+                     if (transactionList[j].type === "Discount") {
+                         sum += 1;
+                     }
                      default:
                      break;
                 }
