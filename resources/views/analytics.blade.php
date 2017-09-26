@@ -83,6 +83,12 @@
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(5, this)">
                             <p>Amount of Redemptions</p>
                         </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(7, this)">
+                            <p>Amount of Reversals</p>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(8, this)">
+                            <p>Amount of Discounts</p>
+                        </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox">
                             <select size="3" onChange="setUser(this.value)" style="width:100px;overflow-y:scroll;">
                                 <option value="None">None</option>
@@ -460,6 +466,16 @@ function calculateData(currentOutletID) {
             break;
             case 6:
             if (transactionList[j].type === "Payment") {
+                sum += 1;
+            }
+            break;
+            case 7:
+            if (transactionList[j].type === "Reversal") {
+                sum += 1;
+            }
+            break;
+            case 8:
+            if (transactionList[j].type === "Discount") {
                 sum += 1;
             }
             break;

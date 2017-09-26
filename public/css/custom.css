@@ -36,6 +36,7 @@
 .clickable-button {
     cursor: pointer;
     background-color: rgb(255,255,255);
+    border-radius: 12px;
 }
 
 h1 {
