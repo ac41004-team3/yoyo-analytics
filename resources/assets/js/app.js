@@ -19,6 +19,7 @@ Vue.component('import-data', require('./components/ImportData.vue'));
 Vue.component('revert-import', require('./components/RevertImport.vue'));
 Vue.component('chart', require('./components/Chart.vue'));
 Vue.component('outlet-select', require('./components/OutletSelect.vue'));
+Vue.component('delete-button', require('./components/DeleteButton.vue'));
 Vue.component('datepicker', require('vuejs-datepicker'));
 
 const app = new Vue({
