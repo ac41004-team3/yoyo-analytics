@@ -129,4 +129,19 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function outlets(Request $request, User $user)
+    {
+        $ids = collect($request->input('outlets'))->map(function ($outlet) {
+            return $outlet['id'];
+        });
+        $user->outlets()->sync($ids);
+    }
 }

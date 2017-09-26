@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
         'middleware' => ['role:admin|super admin'],
     ], function () {
         Route::resource('/users', 'UserController');
+        Route::any('/users/{user}/outlets', 'UserController@outlets')->name('users.outlets');
 
         Route::group([
             'as' => 'import.',

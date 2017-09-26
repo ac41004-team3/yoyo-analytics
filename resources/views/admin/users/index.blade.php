@@ -42,10 +42,6 @@
                             </select>
                             @if ($errors->has('role')) <p class="help-block">{{ $errors->first('role') }}</p> @endif
                         </div>
-                        <div class="form-group  @if ($errors->has('outlets')) has-error @endif">
-                            <outlet-select :outlets="{{ \App\Outlet::all() }}"></outlet-select>
-                            @if ($errors->has('role')) <p class="help-block">{{ $errors->first('role') }}</p> @endif
-                        </div>
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <div>
                                 <button class="btn btn-primary " name="submit" type="submit">
