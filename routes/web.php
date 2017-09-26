@@ -40,4 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
     Route::get('/browse', 'BrowseController@index')->name('browse.index');
     Route::get('/settings', 'SettingsController@index')->name('settings.index');
+    Route::get('/charts', 'ChartsController@index');
+    Route::get('/outlets', 'OutletsController@index');
+    Route::get('/customers', 'CustomersController@index');
+    Route::get('/transactions', 'TransactionsController@index');
 });
