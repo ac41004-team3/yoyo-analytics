@@ -1,12 +1,12 @@
 @component('mail::message')
-# Registration
+    # Registration
 
-{{ $user->name }} ({{$user->email}}) registered and is pending approval.
+    {{ $user->name }} ({{$user->email}}) registered and is pending approval.
 
-@component('mail::button', ['url' => ''])
-Approve
-@endcomponent
+    @component('mail::button', ['url' => ''])
+        Approve
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

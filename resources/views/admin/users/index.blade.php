@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Add User</h3>
@@ -49,11 +49,12 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Manage Users</h3>

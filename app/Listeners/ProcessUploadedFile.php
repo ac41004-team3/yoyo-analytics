@@ -9,7 +9,6 @@ use App\Outlet;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessUploadedFile
 {
@@ -32,27 +31,25 @@ class ProcessUploadedFile
     public function handle(FileUploaded $event)
     {
         $status = 'success';
+
         $import = Import::create([
             'user_id' => Auth::user()->id,
             'status' => $status,
         ]);
 
         try {
-            Excel::filter('chunk')->load(storage_path('app/' . $event->path))->chunk(200,
-                function ($results) use ($import) {
-                    foreach ($results as $row) {
-                        // associative array to indexed
-                        $data = [];
-                        foreach ($row as $entry) {
-                            array_push($data, $entry);
-                        }
-                        $transaction = $this->process($data, $import);
-                        Transaction::updateOrCreate([
-                            'date' => $transaction['date'],
-                            'customer_id' => $transaction['customer_id'],
-                        ], $transaction);
-                    }
-                });
+            $csv = array_map('str_getcsv', file(base_path('import.csv')));
+            foreach ($csv as $key => $value) {
+                if ($key == 0) {
+                    print_r($value);
+                    continue;
+                }
+                $transaction = $this->process($value, $import);
+                Transaction::updateOrCreate([
+                    'date' => $transaction['date'],
+                    'customer_id' => $transaction['customer_id'],
+                ], $transaction);
+            }
         } catch (Exception $e) {
             // TODO: Implement failure detection/logging
             $status = 'error';
