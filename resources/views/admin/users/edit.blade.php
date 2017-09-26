@@ -52,9 +52,14 @@
                         </div>
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <div>
-                                <button class="btn btn-primary " name="submit" type="submit">
+                                <button class="btn btn-primary" name="submit" type="submit">
                                     Save
                                 </button>
+                                <delete-button action="{{ route('admin.users.destroy', $user->id) }}" inline-template>
+                                    <div class="btn btn-danger" name="delete" @click="prompt">
+                                        Delete
+                                    </div>
+                                </delete-button>
                             </div>
                         </div>
                     </form>

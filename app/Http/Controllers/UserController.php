@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Outlet;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -128,6 +127,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        return [
+            'action' => route('admin.users.index')
+        ];
     }
 
     /**
