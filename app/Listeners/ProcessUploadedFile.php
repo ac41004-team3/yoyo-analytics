@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProcessUploadedFile
 {
+    private $status;
     /**
      * Create the event listener.
      *
@@ -19,7 +20,7 @@ class ProcessUploadedFile
      */
     public function __construct()
     {
-        //
+        $this->status = 'importing';
     }
 
     /**
@@ -30,18 +31,15 @@ class ProcessUploadedFile
      */
     public function handle(FileUploaded $event)
     {
-        $status = 'success';
-
         $import = Import::create([
             'user_id' => Auth::user()->id,
-            'status' => $status,
+            'status' => $this->status,
         ]);
 
         try {
-            $csv = array_map('str_getcsv', file(base_path('import.csv')));
+            $csv = array_map('str_getcsv', file(storage_path('app/' . $event->path)));
             foreach ($csv as $key => $value) {
                 if ($key == 0) {
-                    print_r($value);
                     continue;
                 }
                 $transaction = $this->process($value, $import);
@@ -52,11 +50,12 @@ class ProcessUploadedFile
             }
         } catch (Exception $e) {
             // TODO: Implement failure detection/logging
-            $status = 'error';
+            $this->status = 'error';
         } finally {
-            $import->status = $status;
-            $import->save();
+            $this->status = 'success';
         }
+        $import->status = $this->status;
+        $import->save();
     }
 
     private function process($data, $import)
