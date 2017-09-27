@@ -385,7 +385,15 @@ function buildChart() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        callback: function(value, index, values) {
+                            if (currentChart.metric < 4) {
+                                return value.toLocaleString("en-GB",{style:"currency", currency:"GBP"});
+                            }
+                            else {
+                                return value;
+                            }
+                        }
                     }
                 }],
                 xAxes: [{
@@ -505,7 +513,6 @@ function getRandomColor(seed) {
     var color = Math.floor((Math.abs(Math.sin(seed) * 16777215)) % 16777215);
     color = '#' + color.toString(16);
     // pad any colors shorter than 6 characters with leading 0s
-    console.log(color);
     /*while(color.length < 6) {
         color = '0' + color;
     }*/
