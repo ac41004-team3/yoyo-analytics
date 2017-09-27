@@ -8,7 +8,7 @@
             <div class="row">
             <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Your Chart<p>{{ Auth::user()->outlets()->get() }}</p></div>
+                <div class="panel-heading">Your Chart</div>
                 <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                             <p>Amount of Redemptions</p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(7, this)">
-                            <p>Amount of Reversals</p>
+                            <p>Amount of Refunds</p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button measurement-button" onclick="setMetric(8, this)">
                             <p>Amount of Discounts</p>
@@ -123,7 +123,7 @@
                             <p>Creatures of Habit</p>
                         </div>
                     </div>
-                    @if (Auth::user()->outlets()->get() == "[]")
+                    @if (Auth::user()->outlets()->pluck('outlet_id') == "[]")
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="page-header"><b>Outlet Selection</b></h4>
@@ -205,7 +205,7 @@ var currentChart = { //Object which holds data on current chart, modify using se
     periodDefinition: null,
     outlets: []
 };
-currentChart.userOutlet = {!! Auth::user()->outlets()->get() !!};
+currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
 currentChart.outlets = currentChart.userOutlet;
 var barChartData = {//each dataset will be a different outlet essentially
     labels: [],
@@ -454,7 +454,7 @@ function calculateData(currentOutletID) {
             }
             break;
             case 7:
-            if (transactionList[j].type === "Reversal") {
+            if (transactionList[j].type === "Refund") {
                 sum += 1;
             }
             break;
