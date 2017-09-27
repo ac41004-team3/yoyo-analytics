@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/getOutletTotals/{outlets}', 'TransactionsController@getOutletTotals');
+Route::get('/getOutletPeaks/{outlet}', 'TransactionsController@getOutletPeaks');
 
-use App\Import;
+Route::get('/getOutletStats/{outlets}', 'TransactionsController@getOutletStats');
 
 Auth::routes();
 
@@ -38,4 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/revert', 'ImportController@revert')->name('revert');
         });
     });
+
+    Route::view('/takings', 'takings');
+    Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
+    Route::get('/browse', 'BrowseController@index')->name('browse.index');
+    Route::get('/settings', 'SettingsController@index')->name('settings.index');
 });
