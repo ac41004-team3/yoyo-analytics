@@ -123,7 +123,7 @@
                             <p>Creatures of Habit</p>
                         </div>
                     </div>
-                    @if (Auth::user()->outlets()->pluck('outlet_id') == "[]")
+                    @if (Auth::user()->roles()->pluck('id') == "[1]" || Auth::user()->roles()->pluck('id') == "[2]")
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="page-header"><b>Outlet Selection</b></h4>
@@ -199,14 +199,18 @@ var currentChart = { //Object which holds data on current chart, modify using se
     type: null,
     metric: null,
     user: 'None',
+    role: null,
     tribe: 0,
     userOutlet: [],
     timePeriod: [], //Lower Bound, Now
     periodDefinition: null,
     outlets: []
 };
-currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
-currentChart.outlets = currentChart.userOutlet;
+currentChart.role = {!! Auth::user()->roles()->pluck('id') !!};
+if (currentChart.role[0] === 3 || currentChart.role[0] === 4) {
+    currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
+    currentChart.outlets = currentChart.userOutlet;
+}
 var barChartData = {//each dataset will be a different outlet essentially
     labels: [],
     datasets: []
