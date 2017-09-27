@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class ProcessUploadedFile
 {
     private $status;
+
     /**
      * Create the event listener.
      *

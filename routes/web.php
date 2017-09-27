@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
+    Route::get('/settings', 'SettingsController@index')->name('settings.index');
 
     Route::group([
         'as' => 'admin.',
@@ -36,12 +38,4 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/revert', 'ImportController@revert')->name('revert');
         });
     });
-
-    Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
-    Route::get('/browse', 'BrowseController@index')->name('browse.index');
-    Route::get('/settings', 'SettingsController@index')->name('settings.index');
-    Route::get('/charts', 'ChartsController@index');
-    Route::get('/outlets', 'OutletsController@index');
-    Route::get('/customers', 'CustomersController@index');
-    Route::get('/transactions', 'TransactionsController@index');
 });

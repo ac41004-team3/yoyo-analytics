@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class SettingsController extends Controller
 {
-     /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response

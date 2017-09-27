@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\FileUploaded;
 use App\Import;
-use App\Transaction;
 use Illuminate\Http\Request;
 
 class ImportController extends Controller

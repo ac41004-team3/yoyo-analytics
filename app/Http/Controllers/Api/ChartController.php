@@ -102,6 +102,16 @@ class ChartController extends Controller
     }
 
     /**
+     * @param $date Carbon
+     * @param $from Carbon
+     * @return mixed Carbon
+     */
+    private function position($date)
+    {
+        return $date->diffInDays($this->from);
+    }
+
+    /**
      * @param $transactions Collection
      * @return int
      */
@@ -127,15 +137,5 @@ class ChartController extends Controller
                 break;
         }
         return $total;
-    }
-
-    /**
-     * @param $date Carbon
-     * @param $from Carbon
-     * @return mixed Carbon
-     */
-    private function position($date)
-    {
-        return $date->diffInDays($this->from);
     }
 }
