@@ -327,7 +327,7 @@ function buildChart() {
             case 'bubble':
             var dataList = {
                 label: null,
-                backgroundColor: getRandomColor(),
+                backgroundColor: null,
                 borderColor: '#000000',
                 data: []
             };
@@ -336,7 +336,7 @@ function buildChart() {
             case 'line':
             var dataList = {
                 label: null,
-                borderColor: getRandomColor(),
+                borderColor: null,
                 data: []
             };
             break;
@@ -347,6 +347,20 @@ function buildChart() {
         for (k in outlets) {
             if (outlets[k].id === currentChart.outlets[j]) {
                 dataList.label = outlets[k].name;
+                switch (currentChart.type) {
+                    case 'bar':
+                    case 'bubble':
+                    dataList.backgroundColor = getRandomColor(outlets[k].id);
+                    console.log(dataList.backgroundColor);
+                    break;
+                    case 'radar':
+                    case 'line':
+                    dataList.borderColor = getRandomColor(outlets[k].id);
+                    break;
+                    default:
+                    console.log('something went wrong');
+                    break;
+                }
             }
         }
         for (var key in calculations[j]) {
@@ -479,12 +493,22 @@ function calculateData(currentOutletID) {
 }
 
 //SOURCE: https://stackoverflow.com/questions/1484506/random-color-generator
-function getRandomColor() {
+/*function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
+    return color;
+}*/
+function getRandomColor(seed) {
+    var color = Math.floor((Math.abs(Math.sin(seed) * 16777215)) % 16777215);
+    color = '#' + color.toString(16);
+    // pad any colors shorter than 6 characters with leading 0s
+    console.log(color);
+    /*while(color.length < 6) {
+        color = '0' + color;
+    }*/
     return color;
 }
 function minutesOfDay(m) {
