@@ -15,13 +15,13 @@
             revert() {
                 swal({
                     title: 'Are you sure?',
-                    text: "You won't be able to undo this!",
+                    text: 'You won\'t be able to undo this!',
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, revert it!'
-                }).then(function () {
+                    confirmButtonText: 'Yes, revert it!',
+                }).then(function() {
                     this.commit();
                 });
             },
@@ -32,16 +32,16 @@
                     swal(
                         'Reverted!',
                         'Your import has been reverted.',
-                        'success'
-                    )
+                        'success',
+                    );
                 }).catch(error => {
                     swal(
                         'Uh oh!',
                         'We were unable to revert your import.',
-                        'error'
-                    )
+                        'error',
+                    );
                 });
-            }
-        }
+            },
+        },
     };
 </script>

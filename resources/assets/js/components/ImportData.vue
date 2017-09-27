@@ -1,5 +1,6 @@
 <template>
-    <vue-clip :options="options"><template slot="clip-uploader-body" scope="props">
+    <vue-clip :options="options">
+        <template slot="clip-uploader-body" scope="props">
             <div v-for="file in props.files">
                 <img v-bind:src="file.dataUrl"/>
                 {{ file.name }} {{ file.status }}

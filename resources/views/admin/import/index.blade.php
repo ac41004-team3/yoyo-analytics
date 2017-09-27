@@ -3,17 +3,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Import Data</div>
                     <div class="panel-body">
-                        <import-data></import-data>
+                        <form action="{{ route('admin.import.store') }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="file" name="data"/>
+                            <input type="submit" value="Upload"/>
+                        </form>
+                        {{--<import-data></import-data>--}}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">Import History</div>
                     <div class="panel-body">
@@ -32,13 +35,16 @@
                                 <tr>
                                     <td>#{{ $import->id }}</td>
                                     <td>{{ $import->user()->first()->name }}</td>
-                                    <td title="{{ $import->created_at }}">{{ $import->created_at->diffForHumans() }}</td>
-                                    @if($import->status)
-                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                    <td title="{{ $import->updated_at }}">{{ $import->updated_at->diffForHumans() }}</td>
+                                    <td>{{ ucfirst($import->status) }}</td>
+                                    @if($import->status != 'reverted')
+                                        <td>
+                                            <revert-import id="{{ $import->id }}"
+                                                           action="{{ route('admin.import.revert') }}"></revert-import>
+                                        </td>
                                     @else
-                                        <td><i class="fa fa-times" aria-hidden="true"></i></td>
+                                        <td></td>
                                     @endif
-                                    <td><revert-import id="{{ $import->id }}" action="{{ route('admin.import.revert') }}"></revert-import></td>
                                 </tr>
                             @endforeach
                             </tbody>

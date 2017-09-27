@@ -1,15 +1,38 @@
+.navbar-brand {
+    padding: 0px;
+}
+.navbar-brand>img {
+    height: 100%;
+    padding: 9px;
+    width: auto;
+}
+
 /* analytic page links */
-.selectionBox {
-    font-size: 1.1em;
+.outletsContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.customButton{
+    font-size: 200%;
     font-weight: bold;
+    height: auto;
+    display: inline-block;
+}
+
+.selectionBox {
     text-align: center;
-    margin: 10px;
 }
 
 .selectionBox img {
     transition: 1s ease;
-    height: 50%;
-    width: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.selectionBox p{
+    font-size: 100%;
+    font-weight: bold;
 }
 
 .selectionBox img:hover{
@@ -19,12 +42,18 @@
     transition: 1s ease;
 }
 
+.clickable-button {
+    cursor: pointer;
+    background-color: rgb(255,255,255);
+    border-radius: 12px;
+}
+
 h1 {
       display: inline-block;
 }
 
 body {
-    padding-top:35px;
+    padding-top:75px;
 }
 
 /* flashing links */

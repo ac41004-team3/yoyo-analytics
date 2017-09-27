@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\FileUploaded;
 use App\Import;
-use App\Transaction;
 use Illuminate\Http\Request;
 
 class ImportController extends Controller
@@ -42,9 +41,14 @@ class ImportController extends Controller
     public function revert(Request $request)
     {
         $import = Import::findOrFail($request->input('id'));
-        $import->transactions()->each(function ($transaction) {
-            return $transaction->delete();
-        });
+        $import->status = 'reverting';
+        $import->save();
+        $import->transactions()->delete();
+//        $import->transactions()->each(function ($transaction) {
+//            return $transaction->delete();
+//        });
+        $import->status = 'reverted';
+        $import->save();
         return 200;
     }
 }

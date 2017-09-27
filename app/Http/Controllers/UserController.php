@@ -32,7 +32,7 @@ class UserController extends Controller
                 return $user->hasRole('admin');
             });
             $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
-              return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
+                return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
             });
         } else {
             // not allowed
@@ -126,6 +126,24 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return [
+            'action' => route('admin.users.index')
+        ];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @param  \App\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function outlets(Request $request, User $user)
+    {
+        $ids = collect($request->input('outlets'))->map(function ($outlet) {
+            return $outlet['id'];
+        });
+        $user->outlets()->sync($ids);
     }
 }
