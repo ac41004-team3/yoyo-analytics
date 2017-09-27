@@ -123,7 +123,7 @@
                             <p>Creatures of Habit</p>
                         </div>
                     </div>
-                    @if (Auth::user()->outlets()->pluck('outlet_id') == "[]")
+                    @if (Auth::user()->roles()->pluck('id') == "[1]" || Auth::user()->roles()->pluck('id') == "[2]")
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="page-header"><b>Outlet Selection</b></h4>
@@ -199,14 +199,18 @@ var currentChart = { //Object which holds data on current chart, modify using se
     type: null,
     metric: null,
     user: 'None',
+    role: null,
     tribe: 0,
     userOutlet: [],
     timePeriod: [], //Lower Bound, Now
     periodDefinition: null,
     outlets: []
 };
-currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
-currentChart.outlets = currentChart.userOutlet;
+currentChart.role = {!! Auth::user()->roles()->pluck('id') !!};
+if (currentChart.role[0] === 3 || currentChart.role[0] === 4) {
+    currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
+    currentChart.outlets = currentChart.userOutlet;
+}
 var barChartData = {//each dataset will be a different outlet essentially
     labels: [],
     datasets: []
@@ -323,7 +327,7 @@ function buildChart() {
             case 'bubble':
             var dataList = {
                 label: null,
-                backgroundColor: getRandomColor(),
+                backgroundColor: null,
                 borderColor: '#000000',
                 data: []
             };
@@ -332,7 +336,7 @@ function buildChart() {
             case 'line':
             var dataList = {
                 label: null,
-                borderColor: getRandomColor(),
+                borderColor: null,
                 data: []
             };
             break;
@@ -343,6 +347,20 @@ function buildChart() {
         for (k in outlets) {
             if (outlets[k].id === currentChart.outlets[j]) {
                 dataList.label = outlets[k].name;
+                switch (currentChart.type) {
+                    case 'bar':
+                    case 'bubble':
+                    dataList.backgroundColor = getRandomColor(outlets[k].id);
+                    console.log(dataList.backgroundColor);
+                    break;
+                    case 'radar':
+                    case 'line':
+                    dataList.borderColor = getRandomColor(outlets[k].id);
+                    break;
+                    default:
+                    console.log('something went wrong');
+                    break;
+                }
             }
         }
         for (var key in calculations[j]) {
@@ -367,7 +385,15 @@ function buildChart() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        callback: function(value, index, values) {
+                            if (currentChart.metric < 4) {
+                                return value.toLocaleString("en-GB",{style:"currency", currency:"GBP"});
+                            }
+                            else {
+                                return value;
+                            }
+                        }
                     }
                 }],
                 xAxes: [{
@@ -475,12 +501,21 @@ function calculateData(currentOutletID) {
 }
 
 //SOURCE: https://stackoverflow.com/questions/1484506/random-color-generator
-function getRandomColor() {
+/*function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
+    return color;
+}*/
+function getRandomColor(seed) {
+    var color = Math.floor((Math.abs(Math.sin(seed) * 16777215)) % 16777215);
+    color = '#' + color.toString(16);
+    // pad any colors shorter than 6 characters with leading 0s
+    /*while(color.length < 6) {
+        color = '0' + color;
+    }*/
     return color;
 }
 function minutesOfDay(m) {
