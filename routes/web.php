@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/getOutletTotals/{outlets}', 'TransactionsController@getOutletTotals');
+Route::get('/getOutletPeaks/{outlet}', 'TransactionsController@getOutletPeaks');
+
+Route::get('/getOutletStats/{outlets}', 'TransactionsController@getOutletStats');
 
 use App\Import;
 
@@ -17,8 +21,6 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
-    Route::get('/settings', 'SettingsController@index')->name('settings.index');
 
     Route::group([
         'as' => 'admin.',
@@ -26,7 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
         'middleware' => ['role:admin|super admin'],
     ], function () {
         Route::resource('/users', 'UserController');
-        Route::any('/users/{user}/outlets', 'UserController@outlets')->name('users.outlets');
 
         Route::group([
             'as' => 'import.',
@@ -38,4 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/revert', 'ImportController@revert')->name('revert');
         });
     });
+
+    Route::view('/takings', 'takings');
+
+
+
+    Route::get('/analytics', 'AnalyticsController@index')->name('analytics.index');
+    Route::get('/browse', 'BrowseController@index')->name('browse.index');
+    Route::get('/settings', 'SettingsController@index')->name('settings.index');
 });
