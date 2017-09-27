@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
+            <div class="col-sm-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="statsheader">Stats</div>
                     <div class="panel-body" id="stats">

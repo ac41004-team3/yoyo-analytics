@@ -15,7 +15,7 @@ class TransactionsController extends Controller
         $outlet_name = Outlet::where('id', $outlet)->first()->name;
 
         $hours = DB::table('transactions')
-            ->where('outlet_id', $outlet)->whereYear('date', '=', $current_year)
+            ->where('outlet_id', $outlet)
             ->select(DB::raw('HOUR(date) as hour'), DB::raw('COUNT(id) as transaction_count'))
             ->groupBy(DB::raw('Hour(date)'))
             ->orderBy('hour')
@@ -37,7 +37,7 @@ class TransactionsController extends Controller
             $outlet_name = Outlet::where('id', $value)->first()->name;
 
             $totals = DB::table('transactions')
-                ->where('outlet_id', $value)->whereYear('date', '=', $current_year)
+                ->where('outlet_id', $value)
                 ->select(DB::raw('DATE(date) as date'), DB::raw('sum(spent) as total'))
                 ->groupBy(DB::raw('Date(date)'))
                 ->orderBy('date')
@@ -60,7 +60,7 @@ class TransactionsController extends Controller
         foreach ($searchoutlets as $value) {
             $outlet = Outlet::where('id', $value)->first();
             
-            $stats = Transaction::where('outlet_id', $outlet->id)->whereYear('date', '=', $current_year)
+            $stats = Transaction::where('outlet_id', $outlet->id)
                 ->select(DB::raw('COUNT(id) as transaction_count'), DB::raw('sum(discount) as discount_total'),
                     DB::raw('sum(spent) as total'), DB::raw('count(Distinct customer_id) as customer_count'))
                 ->get()
