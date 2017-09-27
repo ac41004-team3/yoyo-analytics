@@ -3,11 +3,6 @@
         Options -MultiViews
     </IfModule>
 
- <Limit GET HEAD POST PUT DELETE OPTIONS>
- Order Allow,Deny
- Allow from all
- </Limit>
-
     RewriteEngine On
 
     # Redirect Trailing Slashes If Not A Folder...
@@ -24,4 +19,3 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
-
