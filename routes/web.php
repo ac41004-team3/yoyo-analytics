@@ -11,8 +11,8 @@
 |
 */
 Route::get('/getOutletTotals/{outlets}', 'TransactionsController@getOutletTotals');
+Route::get('/getUserOutlets', 'TransactionsController@getUserOutlets');
 Route::get('/getOutletPeaks/{outlet}', 'TransactionsController@getOutletPeaks');
-
 Route::get('/getOutletStats/{outlets}', 'TransactionsController@getOutletStats');
 
 use App\Import;
