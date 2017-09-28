@@ -128,9 +128,9 @@
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/owl.svg')}}" alt="Night Owl Tribal Icon">
                             <p>Night Owls</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(4, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/boss.svg')}}" alt="Creatures of Habit Tribal Icon">
-                            <p>Creatures of Habit</p>
+                            <p>Lunch Rush</p>
                         </div>
                     </div>
                     @if (Auth::user()->roles()->pluck('id') == "[1]" || Auth::user()->roles()->pluck('id') == "[2]")
@@ -280,7 +280,6 @@ function addOutlet(outletID, define) {
     if (outletID === 236) {
 		var special = document.getElementById("special");
 		var fontColor = window.getComputedStyle(special).getPropertyValue("color");
-		console.log(fontColor);
 		special.style.color = fontColor === "rgb(255, 255, 255)"
         ? "rgb(0,0,0)" : "rgb(255, 255, 255)";
 	}
@@ -436,7 +435,7 @@ function calculateData(currentOutletID) {
                     }
                     break;
                     case 2:
-                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T09:00:00.000'))) {
+                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T09:00:00.000')) && minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T06:00:00.000'))) {
                         transactionList.push(transactions[i]);
                     }
                     break;
@@ -444,6 +443,12 @@ function calculateData(currentOutletID) {
                     if (transactions[i].total / 100 > 15) {
                         transactionList.push(transactions[i]);
                     }
+                    break;
+                    case 4:
+                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T14:00:00.000')) && minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T12:00:00.000'))) {
+                        transactionList.push(transactions[i]);
+                    }
+                    break;
                     default:
                     transactionList.push(transactions[i]);
                     break;
