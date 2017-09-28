@@ -479,12 +479,15 @@ function calculateData(currentOutletID) {
         switch (currentChart.metric) {
             case 1:
             sum += transactionList[j].total / 100;
+            sum = round(sum, 2);
             break;
             case 2:
             sum += transactionList[j].discount / 100;
+            sum = round(sum, 2);
             break;
             case 3:
             sum += transactionList[j].spent / 100;
+            sum = round(sum, 2);
             break;
             case 4:
             sum += 1;
@@ -537,6 +540,8 @@ function getRandomColor(seed) {
 function minutesOfDay(m) {
     return m.minutes() + m.hours() * 60;
 }
-
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
 </script>
 @endsection
