@@ -21,9 +21,16 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" id="chartheader">Charts</div>
                     <div class="panel-body">
-                        <canvas id="myChart"></canvas>
+
+                    <canvas id="myChart" height="250" ></canvas>
                         </br>
-                        <canvas id="peaksChart"></canvas>
+                        <div id="peaksdiv">
+                        <canvas id="peaksChart"  ></canvas>
+                            <div id="peak_chart_controls">
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -36,14 +43,64 @@
             headers:
                 {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         });
-
+        getOutlets();
+      //debugger;
         getChartData();
-        generatePeaksChart();
-        getOutletStats();
+       // debugger;
 
+        getOutletStats();
+       //
     });
 
-    function getOutletStats() {
+
+    function getOutlets()
+    {
+
+        $.ajax({
+
+            url: 'getUserOutlets',
+            method: 'GET',
+
+            success: function (data) {
+          //         debugger;
+                //var name
+//
+                generatePeaksChart(data[0].id);
+                generateButtons(data);
+            }
+
+        });
+
+    }
+
+
+    function generateButtons(data)
+    {
+            var markup="";
+        $.each(data, function(index,value) {
+            if(value!=undefined) {
+
+                markup += "<input type='radio' name='generatepeaks' id='generatepeaks' onclick='clickRadio()' value=" + value.id + " >" + value.name+"&nbsp;";
+            }
+               });
+        $('#peak_chart_controls').append(markup);
+
+    }
+
+    //gets value of selected radio button then updates peak time chart
+   function clickRadio(){
+
+     // alert('clicked');
+       // debugger;
+      //  this.val();
+       var outlet_id= $('input[name=generatepeaks]:checked', '#peak_chart_controls').val();
+        generatePeaksChart(outlet_id);
+    }
+
+    function getOutletStats()
+    {
+
+
 
         $.ajax({
 
@@ -95,7 +152,9 @@
 
         $('#statsheader').append(' ' + data.year);
         //$('#chartheader').append(" "+data.year);
-        var title = 'Daily sales value over time for outlets in ';//+data.year;
+
+        var title="Daily sales value(£) over time for outlets";//+data.year;
+
 
         var datasets = [];
 
@@ -163,14 +222,20 @@
 
     }
 
-    function generatePeaksChart() {
-        //  debugger;
+
+
+    function generatePeaksChart(outlet_id)
+    {
+      //  debugger;
+
         $.ajax({
 
             url: 'getOutletPeaks/{outlet}',
             method: 'GET',
-            data: {outlet: '241'},
-            success: function(data) {
+
+            data: {outlet:outlet_id},
+            success: function (data) {
+
                 //  debugger;
 
                 var title = 'Average transactions over each hour in ' + data.outlet_name;//+" for "+data.year;

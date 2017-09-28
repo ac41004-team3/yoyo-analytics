@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Outlet;
 use App\Transaction;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TransactionsController extends Controller
@@ -27,10 +29,18 @@ class TransactionsController extends Controller
         return $hours;
     }
 
+    public function getUserOutlets()
+    {
+        $outlets =Auth::user()->outlets()->get(['id','name']);
+        return $outlets;
+    }
+
     public function getOutletTotals()
     {
         $current_year = date('Y');
-        $outlets = $_GET['outlets'];
+       // $outlets = $_GET['outlets'];
+       $outlets =Auth::user()->outlets()->pluck('id');
+      //dd($outlets);
         $totals_array = [];
 
         foreach ($outlets as $value) {
@@ -54,7 +64,9 @@ class TransactionsController extends Controller
     public function getOutletStats()
     {
         $current_year = date('Y');
-        $searchoutlets = $_GET['outlets'];
+
+        //$searchoutlets = $_GET['outlets'];
+        $searchoutlets =Auth::user()->outlets()->pluck('id');
         $stats_array = [];
         
         foreach ($searchoutlets as $value) {
@@ -72,5 +84,8 @@ class TransactionsController extends Controller
 
         return $stats_array;
     }
+
+
+
 
 }
