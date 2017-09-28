@@ -60,10 +60,6 @@
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/bar-chart.svg')}}" alt="Bar Chart Icon">
                             <p>Bar</p>
                         </div>
-                        <div id="3" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('pie', this)">
-                            <img class="img-fluid" src="{{ URL::asset('/images/charts/pie-chart.svg')}}" alt="Pie Chart Icon">
-                            <p>Pie</p>
-                        </div>
                         <div id="4" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('radar', this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/radar-chart.svg')}}" alt="Radar Chart Icon">
                             <p>Radar</p>
