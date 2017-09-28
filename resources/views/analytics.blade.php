@@ -19,7 +19,7 @@
             <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Your Chart</div>
-                <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
+                <div class="panel-body"><canvas id="myChart" width="100" height="70"></canvas></div>
             </div>
         </div>
         </div>
