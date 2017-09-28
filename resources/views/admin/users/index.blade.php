@@ -66,7 +66,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Active</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,11 +74,6 @@
                                 <td><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ ucwords($user->getRoleNames()->first()) }}</td>
-                                @if ($user->is_active)
-                                    <td><i class="fa fa-times" aria-hidden="true"></i></td>
-                                @else
-                                    <td><i class="fa fa-check" aria-hidden="true"></i></td>
-                                @endif
                             </tr>
                         @endforeach
                         </tbody>

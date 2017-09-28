@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
         'middleware' => ['role:admin|super admin|manager'],
     ], function () {
         Route::resource('/users', 'UserController');
+        Route::post('/users/{user}/outlets', 'UserController@outlets')->name('users.outlets');
 
         Route::group([
             'as' => 'import.',

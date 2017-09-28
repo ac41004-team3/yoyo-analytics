@@ -21,22 +21,22 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->hasPermissionTo('manage-assigned-users')) {
-            $users = User::all();
-            $roles = Role::all()->reverse();
-        } elseif ($user->hasPermissionTo('manage-users')) {
+        if ($user->hasPermissionTo('manage-users')) {
+            $users = User::all()->reject(function ($user) {
+                return $user->hasRole('super admin');
+            });
+        } elseif ($user->hasPermissionTo('manage-assigned-users')) {
             // get non-administrative users associated with the users outlet
             $users = $user->outlets()->get()->flatMap(function ($outlet) {
                 return $outlet->users()->get();
             })->reject(function ($user) {
                 return $user->hasRole('admin');
             });
-            $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
-                return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
-            });
-        } else {
-            // not allowed
         }
+
+        $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
+            return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
+        });
 
         return view('admin.users.index')
             ->with('users', $users)
@@ -54,7 +54,6 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'is_active' => 'integer',
         ]);
 
         $role = Role::findOrFail($request->input('role'));
@@ -63,7 +62,6 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt(str_random(32)),
-            'is_active' => 1,
         ])->syncRoles($role);
 
         $this->sendResetLinkEmail($request);
@@ -90,7 +88,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit')->with('user', $user);
+        $roles = Role::all()->reverse()->reject(function ($role) use ($user) {
+            return $role->id <= Role::findByName($user->getRoleNames()->first())->id;
+        });
+
+        return view('admin.users.edit')
+            ->with('roles', $roles)
+            ->with('user', $user);
     }
 
     /**
@@ -105,14 +109,12 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'is_active' => 'integer',
         ]);
 
         $role = Role::findOrFail($request->input('role'));
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'is_active' => $request->input('is_active')
         ]);
         $user->syncRoles($role);
         return redirect()->route('admin.users.index');
