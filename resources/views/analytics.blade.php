@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('dependencies')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css"/>
+@endsection
+
+
 @section('content')
 
 <div class="container-fluid">
@@ -9,7 +19,7 @@
             <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Your Chart</div>
-                <div class="panel-body"><canvas id="myChart" width="100" height="50"></canvas></div>
+                <div class="panel-body"><canvas id="myChart" width="100" height="70"></canvas></div>
             </div>
         </div>
         </div>
@@ -49,10 +59,6 @@
                         <div id="2" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('bar', this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/bar-chart.svg')}}" alt="Bar Chart Icon">
                             <p>Bar</p>
-                        </div>
-                        <div id="3" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button">
-                            <img class="img-fluid" src="{{ URL::asset('/images/charts/pie-chart.svg')}}" alt="Pie Chart Icon">
-                            <p>Pie</p>
                         </div>
                         <div id="4" class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button chart-button" onclick="changeChartType('radar', this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/charts/radar-chart.svg')}}" alt="Radar Chart Icon">
@@ -118,12 +124,12 @@
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/owl.svg')}}" alt="Night Owl Tribal Icon">
                             <p>Night Owls</p>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button">
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button tribe-button" onclick="setTribe(4, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/tribes/boss.svg')}}" alt="Creatures of Habit Tribal Icon">
-                            <p>Creatures of Habit</p>
+                            <p>Lunch Rush</p>
                         </div>
                     </div>
-                    @if (Auth::user()->outlets()->pluck('outlet_id') == "[]")
+                    @if (Auth::user()->roles()->pluck('id') == "[1]" || Auth::user()->roles()->pluck('id') == "[2]")
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="page-header"><b>Outlet Selection</b></h4>
@@ -134,7 +140,7 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(236, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/air_bar.svg')}}" alt="Air Bar Icon">
-                            <p>Air Bar</p>
+                            <p id="special">Air Bar</p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3 selectionBox clickable-button outlet-button" onclick="addOutlet(240, this)">
                             <img class="img-fluid" src="{{ URL::asset('/images/outlets/foodonfour.svg')}}" alt="Food on Four Icon">
@@ -199,14 +205,18 @@ var currentChart = { //Object which holds data on current chart, modify using se
     type: null,
     metric: null,
     user: 'None',
+    role: null,
     tribe: 0,
     userOutlet: [],
     timePeriod: [], //Lower Bound, Now
     periodDefinition: null,
     outlets: []
 };
-currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
-currentChart.outlets = currentChart.userOutlet;
+currentChart.role = {!! Auth::user()->roles()->pluck('id') !!};
+if (currentChart.role[0] === 3 || currentChart.role[0] === 4) {
+    currentChart.userOutlet = {!! Auth::user()->outlets()->pluck('outlet_id') !!};
+    currentChart.outlets = currentChart.userOutlet;
+}
 var barChartData = {//each dataset will be a different outlet essentially
     labels: [],
     datasets: []
@@ -261,8 +271,14 @@ function addOutlet(outletID, define) {
     for (var i = 0; i < elems.length; i++) {
         var color = window.getComputedStyle(define).getPropertyValue("background-color");
         define.style.backgroundColor = color === "rgb(255, 255, 255)"
-        ? "rgb(0, 180, 255)" : "rgb(255, 255, 255)";
+        ? getRandomColor(outletID) : "rgb(255, 255, 255)";
     }
+    if (outletID === 236) {
+		var special = document.getElementById("special");
+		var fontColor = window.getComputedStyle(special).getPropertyValue("color");
+		special.style.color = fontColor === "rgb(255, 255, 255)"
+        ? "rgb(0,0,0)" : "rgb(255, 255, 255)";
+	}
     currentChart.outlets.indexOf(outletID) === -1 ? currentChart.outlets.push(outletID) : currentChart.outlets.splice(currentChart.outlets.indexOf(outletID), 1);
 }
 
@@ -295,7 +311,6 @@ function setTribe(tribe, define) {
     else {
         currentChart.tribe = tribe;
     }
-    console.log(currentChart.tribe);
 }
 function setUser(user) {
     currentChart.user = user;
@@ -320,10 +335,10 @@ function buildChart() {
     for (j in calculations) { //sep method
         switch (currentChart.type) {
             case 'bar':
-            case 'bubble':
+            case 'pie':
             var dataList = {
                 label: null,
-                backgroundColor: getRandomColor(),
+                backgroundColor: null,
                 borderColor: '#000000',
                 data: []
             };
@@ -332,7 +347,7 @@ function buildChart() {
             case 'line':
             var dataList = {
                 label: null,
-                borderColor: getRandomColor(),
+                borderColor: null,
                 data: []
             };
             break;
@@ -343,6 +358,19 @@ function buildChart() {
         for (k in outlets) {
             if (outlets[k].id === currentChart.outlets[j]) {
                 dataList.label = outlets[k].name;
+                switch (currentChart.type) {
+                    case 'bar':
+                    case 'pie':
+                    dataList.backgroundColor = getRandomColor(outlets[k].id);
+                    break;
+                    case 'radar':
+                    case 'line':
+                    dataList.borderColor = getRandomColor(outlets[k].id);
+                    break;
+                    default:
+                    console.log('something went wrong');
+                    break;
+                }
             }
         }
         for (var key in calculations[j]) {
@@ -367,7 +395,15 @@ function buildChart() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        callback: function(value, index, values) {
+                            if (currentChart.metric < 4) {
+                                return value.toLocaleString("en-GB",{style:"currency", currency:"GBP"});
+                            }
+                            else {
+                                return value;
+                            }
+                        }
                     }
                 }],
                 xAxes: [{
@@ -395,7 +431,7 @@ function calculateData(currentOutletID) {
                     }
                     break;
                     case 2:
-                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T09:00:00.000'))) {
+                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T09:00:00.000')) && minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T06:00:00.000'))) {
                         transactionList.push(transactions[i]);
                     }
                     break;
@@ -403,6 +439,12 @@ function calculateData(currentOutletID) {
                     if (transactions[i].total / 100 > 15) {
                         transactionList.push(transactions[i]);
                     }
+                    break;
+                    case 4:
+                    if (minutesOfDay(moment(transactions[i].date)) < minutesOfDay(moment('2013-01-01T14:00:00.000')) && minutesOfDay(moment(transactions[i].date)) > minutesOfDay(moment('2013-01-01T12:00:00.000'))) {
+                        transactionList.push(transactions[i]);
+                    }
+                    break;
                     default:
                     transactionList.push(transactions[i]);
                     break;
@@ -433,12 +475,15 @@ function calculateData(currentOutletID) {
         switch (currentChart.metric) {
             case 1:
             sum += transactionList[j].total / 100;
+            sum = round(sum, 2);
             break;
             case 2:
             sum += transactionList[j].discount / 100;
+            sum = round(sum, 2);
             break;
             case 3:
             sum += transactionList[j].spent / 100;
+            sum = round(sum, 2);
             break;
             case 4:
             sum += 1;
@@ -475,17 +520,24 @@ function calculateData(currentOutletID) {
 }
 
 //SOURCE: https://stackoverflow.com/questions/1484506/random-color-generator
-function getRandomColor() {
+/*function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+}*/
+function getRandomColor(seed) {
+    var color = Math.floor((Math.abs(Math.sin(seed) * 16777215)) % 16777215);
+    color = '#' + color.toString(16);
+    return color;
 }
 function minutesOfDay(m) {
     return m.minutes() + m.hours() * 60;
 }
-
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
 </script>
 @endsection
